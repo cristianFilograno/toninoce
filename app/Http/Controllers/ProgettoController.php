@@ -27,6 +27,7 @@ class ProgettoController extends Controller
 
         $anni = Progetto::pubblicati()
             ->whereNotNull('anno')
+            ->reorder()
             ->distinct()
             ->orderByDesc('anno')
             ->pluck('anno');
