@@ -65,12 +65,6 @@ $macroCategorie = [
 
 <section class="max-w-7xl mx-auto px-6 pb-24">
 
-    @if($categorie->isEmpty() && $senzaCategoria->isEmpty())
-        <p class="text-center py-24" style="color:#4e4030;">
-            {{ app()->getLocale() === 'it' ? 'Nessun documento disponibile.' : 'No documents available.' }}
-        </p>
-    @else
-
     <div class="space-y-2">
     @foreach($macroCategorie as $macro)
     @php
@@ -219,7 +213,6 @@ $macroCategorie = [
     @endforeach
     </div>
 
-    @endif
 </section>
 
 <script>
