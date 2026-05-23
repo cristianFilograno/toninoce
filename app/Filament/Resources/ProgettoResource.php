@@ -68,8 +68,9 @@ class ProgettoResource extends Resource
                         ->image()
                         ->imageEditor()
                         ->deletable()
+                        ->maxSize(20480)
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                        ->helperText('Immagine principale del progetto'),
+                        ->helperText('Immagine principale del progetto (max 20 MB)'),
 
                     FileUpload::make('galleria')
                         ->label('Galleria immagini')
@@ -79,8 +80,9 @@ class ProgettoResource extends Resource
                         ->reorderable()
                         ->deletable()
                         ->image()
+                        ->maxSize(20480)
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                        ->helperText('Puoi caricare più immagini e riordinarle'),
+                        ->helperText('Puoi caricare più immagini e riordinarle (max 20 MB ciascuna)'),
                 ]),
 
             ])->columnSpanFull(),
