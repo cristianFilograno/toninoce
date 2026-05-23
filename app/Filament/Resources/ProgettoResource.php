@@ -103,6 +103,12 @@ class ProgettoResource extends Resource
                     ->label('Anno')
                     ->placeholder('es. 2024'),
 
+                TextInput::make('importo_lavori')
+                    ->label('Importo lavori (€)')
+                    ->numeric()
+                    ->placeholder('es. 250000')
+                    ->helperText('Inserisci il valore in euro senza punti o virgole'),
+
                 TextInput::make('ordine')
                     ->label('Ordine')
                     ->numeric()

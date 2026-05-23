@@ -128,6 +128,12 @@
                     <dd class="text-sm font-medium" style="color:#1a1510;">{{ $luogo }}</dd>
                 </div>
                 @endif
+                @if($progetto->importo_lavori)
+                <div>
+                    <dt class="text-[10px] tracking-[0.2em] uppercase mb-1" style="color:#4e4030;">{{ $locale === 'it' ? 'Importo lavori' : 'Works value' }}</dt>
+                    <dd class="text-sm font-medium" style="color:#1a1510;">€ {{ number_format($progetto->importo_lavori, 0, ',', '.') }}</dd>
+                </div>
+                @endif
                 @if($progetto->categoria)
                 <div>
                     <dt class="text-[10px] tracking-[0.2em] uppercase mb-1" style="color:#4e4030;">{{ $locale === 'it' ? 'Categoria' : 'Category' }}</dt>

@@ -24,14 +24,16 @@ class Progetto extends Model
         'galleria',
         'pubblicato',
         'ordine',
+        'importo_lavori',
     ];
 
     public array $translatable = ['titolo', 'descrizione', 'luogo'];
 
     protected $casts = [
-        'pubblicato' => 'boolean',
-        'ordine'     => 'integer',
-        'galleria'   => 'array',
+        'pubblicato'     => 'boolean',
+        'ordine'         => 'integer',
+        'galleria'       => 'array',
+        'importo_lavori' => 'integer',
     ];
 
     public function categoria(): BelongsTo

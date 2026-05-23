@@ -193,6 +193,12 @@
                         <p class="text-sm" style="color:#1a1510;">{{ $luogo }}</p>
                     </div>
                     @endif
+                    @if($progetto->importo_lavori)
+                    <div>
+                        <p class="text-[10px] tracking-[0.2em] uppercase mb-0.5" style="color:#c0392b;">{{ app()->getLocale() === 'it' ? 'Importo lavori' : 'Works value' }}</p>
+                        <p class="text-sm" style="color:#1a1510;">€ {{ number_format($progetto->importo_lavori, 0, ',', '.') }}</p>
+                    </div>
+                    @endif
                     @if($progetto->categoria)
                     <div>
                         <p class="text-[10px] tracking-[0.2em] uppercase mb-0.5" style="color:#c0392b;">{{ app()->getLocale() === 'it' ? 'Categoria' : 'Category' }}</p>
