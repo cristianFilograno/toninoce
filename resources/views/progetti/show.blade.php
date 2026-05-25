@@ -153,6 +153,43 @@
     </div>
 </section>
 
+{{-- Documentazione allegata --}}
+@php $allegati = $progetto->getAllegati(); @endphp
+@if(count($allegati))
+<section class="max-w-7xl mx-auto px-6 mb-16">
+    <div class="border-t pt-10" style="border-color:#d8cdb8;">
+        <p class="text-[10px] tracking-[0.3em] uppercase mb-6 font-medium" style="color:#c0392b;">
+            {{ $locale === 'it' ? 'Documentazione allegata' : 'Attached documentation' }}
+        </p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            @foreach($allegati as $file)
+            <a href="{{ $file['url'] }}" target="_blank" rel="noopener"
+               class="flex items-center gap-4 px-4 py-3 border transition-all group"
+               style="border-color:#d8cdb8;"
+               onmouseover="this.style.borderColor='#1a1510'; this.style.background='#ede7d3';"
+               onmouseout="this.style.borderColor='#d8cdb8'; this.style.background='transparent';">
+                {{-- Badge tipo --}}
+                <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-[10px] font-bold tracking-wider"
+                      style="background:{{ $file['tipo'] === 'pdf' ? '#ef4444' : '#22c55e' }}; color:#fff;">
+                    {{ $file['ext'] }}
+                </span>
+                {{-- Nome file --}}
+                <div class="min-w-0">
+                    <p class="text-xs font-medium truncate" style="color:#1a1510;">{{ $file['nome'] }}</p>
+                    <p class="text-[10px] mt-0.5" style="color:#8a7a64;">
+                        {{ $locale === 'it' ? 'Scarica' : 'Download' }}
+                        <svg class="inline w-3 h-3 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                    </p>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
 {{-- Nav torna ai progetti --}}
 <div class="max-w-7xl mx-auto px-6 pb-20 border-t pt-8" style="border-color:#d8cdb8;">
     <a href="{{ route('progetti', ['locale' => $locale]) }}"

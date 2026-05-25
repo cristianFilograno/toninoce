@@ -211,6 +211,28 @@
                         <p class="text-xs leading-relaxed" style="color:#1a1510;">{{ Str::limit($desc, 180) }}</p>
                     </div>
                     @endif
+                    @php $allegati = $progetto->getAllegati(); @endphp
+                    @if(count($allegati))
+                    <div>
+                        <p class="text-[10px] tracking-[0.2em] uppercase mb-1.5" style="color:#c0392b;">
+                            {{ app()->getLocale() === 'it' ? 'Documentazione' : 'Documentation' }}
+                        </p>
+                        <div class="space-y-1">
+                            @foreach($allegati as $file)
+                            <a href="{{ $file['url'] }}" target="_blank" rel="noopener"
+                               class="flex items-center gap-2 text-xs transition-colors"
+                               style="color:#1a1510;"
+                               onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
+                                <span class="flex-shrink-0 text-[9px] font-bold px-1 py-0.5 tracking-wider"
+                                      style="background:{{ $file['tipo'] === 'pdf' ? '#ef4444' : '#22c55e' }}; color:#fff;">
+                                    {{ $file['ext'] }}
+                                </span>
+                                <span class="truncate">{{ $file['nome'] }}</span>
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
                     <a href="{{ route('progetto.show', ['locale' => $locale, 'slug' => $progetto->slug]) }}"
                        class="inline-flex items-center gap-2 text-xs tracking-widest uppercase border px-4 py-2 transition-all mt-2"
                        style="border-color:#1a1510; color:#1a1510;"

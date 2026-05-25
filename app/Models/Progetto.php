@@ -25,6 +25,7 @@ class Progetto extends Model
         'pubblicato',
         'ordine',
         'importo_lavori',
+        'allegati',
     ];
 
     public array $translatable = ['titolo', 'descrizione', 'luogo'];
@@ -34,6 +35,7 @@ class Progetto extends Model
         'ordine'         => 'integer',
         'galleria'       => 'array',
         'importo_lavori' => 'integer',
+        'allegati'       => 'array',
     ];
 
     public function categoria(): BelongsTo
@@ -51,6 +53,31 @@ class Progetto extends Model
     {
         if (!$this->galleria) return [];
         return array_map(fn($path) => Storage::disk('public')->url($path), $this->galleria);
+    }
+
+    /**
+     * Restituisce un array di ['url', 'nome', 'tipo'] per ogni allegato.
+     */
+    public function getAllegati(): array
+    {
+        if (!$this->allegati) return [];
+
+        return array_map(function (string $path) {
+            $nome = basename($path);
+            $ext  = strtolower(pathinfo($nome, PATHINFO_EXTENSION));
+            $tipo = match ($ext) {
+                'pdf'        => 'pdf',
+                'xls', 'xlsx' => 'excel',
+                default       => 'file',
+            };
+
+            return [
+                'url'  => Storage::disk('public')->url($path),
+                'nome' => $nome,
+                'tipo' => $tipo,
+                'ext'  => strtoupper($ext),
+            ];
+        }, $this->allegati);
     }
 
     public function scopePubblicati($query)

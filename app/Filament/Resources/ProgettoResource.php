@@ -60,6 +60,23 @@ class ProgettoResource extends Resource
                         ->label('Location (EN)'),
                 ]),
 
+                Tabs\Tab::make('📎 Allegati')->schema([
+                    FileUpload::make('allegati')
+                        ->label('Documenti allegati')
+                        ->disk('public')
+                        ->directory('progetti/allegati')
+                        ->multiple()
+                        ->reorderable()
+                        ->deletable()
+                        ->maxSize(20480)
+                        ->acceptedFileTypes([
+                            'application/pdf',
+                            'application/vnd.ms-excel',
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                        ])
+                        ->helperText('Carica PDF o Excel fino a 20 MB ciascuno. Questi file saranno visibili nella pagina del progetto come documentazione scaricabile.'),
+                ]),
+
                 Tabs\Tab::make('📷 Foto')->schema([
                     FileUpload::make('foto_copertina')
                         ->label('Foto copertina')
