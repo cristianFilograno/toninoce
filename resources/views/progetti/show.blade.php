@@ -163,27 +163,50 @@
         </p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             @foreach($allegati as $file)
-            <a href="{{ $file['url'] }}" target="_blank" rel="noopener"
-               class="flex items-center gap-4 px-4 py-3 border transition-all group"
-               style="border-color:#d8cdb8;"
-               onmouseover="this.style.borderColor='#1a1510'; this.style.background='#ede7d3';"
-               onmouseout="this.style.borderColor='#d8cdb8'; this.style.background='transparent';">
+            <div class="flex items-center gap-4 px-4 py-3 border transition-all"
+                 style="border-color:#d8cdb8;"
+                 onmouseover="this.style.borderColor='#1a1510'; this.style.background='#ede7d3';"
+                 onmouseout="this.style.borderColor='#d8cdb8'; this.style.background='transparent';">
                 {{-- Badge tipo --}}
                 <span class="flex-shrink-0 w-10 h-10 flex items-center justify-center text-[10px] font-bold tracking-wider"
                       style="background:{{ $file['tipo'] === 'pdf' ? '#ef4444' : '#22c55e' }}; color:#fff;">
                     {{ $file['ext'] }}
                 </span>
                 {{-- Nome file --}}
-                <div class="min-w-0">
+                <div class="min-w-0 flex-1">
                     <p class="text-xs font-medium truncate" style="color:#1a1510;">{{ $file['nome'] }}</p>
-                    <p class="text-[10px] mt-0.5" style="color:#8a7a64;">
-                        {{ $locale === 'it' ? 'Scarica' : 'Download' }}
-                        <svg class="inline w-3 h-3 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                        </svg>
-                    </p>
+                    <div class="flex items-center gap-3 mt-1">
+                        @if($file['tipo'] === 'pdf')
+                        <button type="button"
+                                onclick="openPdfModal('{{ $file['url'] }}', '{{ addslashes($file['nome']) }}')"
+                                style="background:none; border:none; padding:0; cursor:pointer;
+                                       color:#8a7a64; font-size:0.65rem; letter-spacing:0.1em;
+                                       text-transform:uppercase; display:flex; align-items:center; gap:4px;"
+                                onmouseover="this.style.color='#1a1510';" onmouseout="this.style.color='#8a7a64';">
+                            <svg style="width:11px;height:11px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            {{ $locale === 'it' ? 'Anteprima' : 'Preview' }}
+                        </button>
+                        <span style="color:#d8cdb8;">·</span>
+                        @endif
+                        <a href="{{ $file['url'] }}" download
+                           style="color:#8a7a64; font-size:0.65rem; letter-spacing:0.1em;
+                                  text-transform:uppercase; text-decoration:none;
+                                  display:flex; align-items:center; gap:4px;"
+                           onmouseover="this.style.color='#1a1510';" onmouseout="this.style.color='#8a7a64';">
+                            <svg style="width:11px;height:11px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            {{ $locale === 'it' ? 'Scarica' : 'Download' }}
+                        </a>
+                    </div>
                 </div>
-            </a>
+            </div>
             @endforeach
         </div>
     </div>

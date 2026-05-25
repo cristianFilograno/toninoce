@@ -178,6 +178,45 @@
         </div>
     </footer>
 
+    {{-- ── PDF PREVIEW MODAL ───────────────────────────────────────── --}}
+    <div id="pdf-modal"
+         role="dialog"
+         aria-modal="true"
+         onclick="closePdfModal(event)"
+         style="display:none; position:fixed; inset:0; z-index:9998; background:rgba(0,0,0,0.85);">
+        <div onclick="event.stopPropagation()"
+             style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+                    width:90vw; max-width:1100px; height:88vh;
+                    display:flex; flex-direction:column; background:#1a1510;">
+            <div style="display:flex; align-items:center; justify-content:space-between;
+                        padding:10px 16px; flex-shrink:0;">
+                <span id="pdf-modal-title"
+                      style="color:#f0ead6; font-size:0.7rem; letter-spacing:0.15em;
+                             text-transform:uppercase; overflow:hidden; text-overflow:ellipsis;
+                             white-space:nowrap; max-width:70%;"></span>
+                <div style="display:flex; align-items:center; gap:16px;">
+                    <a id="pdf-modal-download" href="#"
+                       style="color:#8a7a64; font-size:0.7rem; letter-spacing:0.15em;
+                              text-transform:uppercase; text-decoration:none;
+                              display:flex; align-items:center; gap:6px;"
+                       onmouseover="this.style.color='#f0ead6';" onmouseout="this.style.color='#8a7a64';">
+                        <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        {{ app()->getLocale() === 'it' ? 'Scarica' : 'Download' }}
+                    </a>
+                    <button onclick="closePdfModal()"
+                            style="background:none; border:none; color:#8a7a64; font-size:1.6rem;
+                                   line-height:1; cursor:pointer; padding:0;"
+                            onmouseover="this.style.color='#f0ead6';" onmouseout="this.style.color='#8a7a64';">×</button>
+                </div>
+            </div>
+            <iframe id="pdf-modal-frame" src=""
+                    style="flex:1; border:none; width:100%; background:#fff;"></iframe>
+        </div>
+    </div>
+
     {{-- ── LIGHTBOX ─────────────────────────────────────────────────── --}}
     <div id="lightbox"
          role="dialog"
@@ -234,8 +273,23 @@
             document.body.style.overflow = '';
         }
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'Escape') { closeLightbox(); closePdfModal(); }
         });
+
+        // ── PDF Modal ─────────────────────────────────────────────────
+        function openPdfModal(url, nome) {
+            document.getElementById('pdf-modal-frame').src = url;
+            document.getElementById('pdf-modal-title').textContent = nome || '';
+            document.getElementById('pdf-modal-download').href = url;
+            document.getElementById('pdf-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closePdfModal(e) {
+            if (e && e.target !== document.getElementById('pdf-modal')) return;
+            document.getElementById('pdf-modal').style.display = 'none';
+            document.getElementById('pdf-modal-frame').src = '';
+            document.body.style.overflow = '';
+        }
 
         // ── Burger menu ───────────────────────────────────────────────
         (function () {
