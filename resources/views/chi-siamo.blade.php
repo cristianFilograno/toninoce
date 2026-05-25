@@ -3,8 +3,8 @@
 @section('title', app()->getLocale() === 'it' ? 'Studio — TONINOcè' : 'Studio — TONINOcè')
 
 @section('description', app()->getLocale() === 'it'
-    ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, direzione lavori, recupero e consolidamento di edifici. Dal 2010.'
-    : 'TONINOcè is a structural engineering studio specialised in design, site management, recovery and consolidation of buildings. Since 2010.')
+    ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, costruzione e consolidamento del costruito. Ingegnere dal 2022.'
+    : 'TONINOcè is a structural engineering studio specialised in design, construction and consolidation of existing buildings. Engineer since 2022.')
 
 @section('content')
 
@@ -15,7 +15,7 @@
         <div data-animate data-delay="0.05s" class="flex items-center gap-4 mb-10">
             <div class="w-8 h-px" style="background:#c0392b;"></div>
             <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
-                {{ app()->getLocale() === 'it' ? 'Studio di Ingegneria · Dal 2010' : 'Engineering Studio · Since 2010' }}
+                {{ app()->getLocale() === 'it' ? 'Studio d\'Ingegneria · Ingegnere dal 2022' : 'Engineering Studio · Engineer since 2022' }}
             </p>
         </div>
 
@@ -26,9 +26,9 @@
             <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
                 {{ app()->getLocale() === 'it' ? 'precisione,' : 'precision,' }}
             </span><br>
-            {{ app()->getLocale() === 'it' ? 'progettare con' : 'designing with' }}
+            {{ app()->getLocale() === 'it' ? 'progettare su' : 'designing' }}
             <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
-                {{ app()->getLocale() === 'it' ? 'misura.' : 'measure.' }}
+                {{ app()->getLocale() === 'it' ? 'misura.' : 'bespoke.' }}
             </span>
         </h1>
 
@@ -36,8 +36,8 @@
            class="mb-12 max-w-lg leading-relaxed"
            style="font-size:1.125rem; color:#4e4030; font-weight:300;">
             {{ app()->getLocale() === 'it'
-                ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, direzione lavori e consolidamento. Operiamo dove la tecnica incontra la cura per il dettaglio.'
-                : 'TONINOcè is a structural engineering studio specialised in design, site management and consolidation. We work where technique meets attention to detail.' }}
+                ? 'Antonio Ceglie, al secolo come Toninocè, è un ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito. Operiamo dove la tecnica incontra la cura del dettaglio.'
+                : 'Antonio Ceglie, known as Toninocè, is a structural engineer specialised in design, construction and consolidation of existing buildings. We work where technique meets attention to detail.' }}
         </p>
 
         <div data-animate data-delay="0.4s"
@@ -66,25 +66,32 @@
 {{-- ── TICKER NEWS ──────────────────────────────────────────────── --}}
 <div data-animate="fade" class="overflow-hidden border-y py-4" style="border-color:#d8cdb8; background:rgba(240,234,214,0.6);">
     <div class="ticker-track select-none" style="white-space:nowrap;">
-        @php $items = [
-            'Nuovo progetto completato a Milano',
-            'Certificazione sismica edificio storico — Firenze',
-            'Collaborazione con studio Archi+Partners',
-            'Seminario BIM strutturale — Politecnico di Torino',
-            'Progetto residenziale NZEB premiato',
-            'Consolidamento fondazioni — Venezia Centro Storico',
-            'Nuovo progetto completato a Milano',
-            'Certificazione sismica edificio storico — Firenze',
-            'Collaborazione con studio Archi+Partners',
-            'Seminario BIM strutturale — Politecnico di Torino',
-            'Progetto residenziale NZEB premiato',
-            'Consolidamento fondazioni — Venezia Centro Storico',
-        ]; @endphp
+        @php
+        $items = app()->getLocale() === 'it' ? [
+            'Diagnostica strutturale',
+            'Consolidamento del costruito',
+            'Analisi di vulnerabilità statica e sismica',
+            'Progettazione di ponti',
+            'Progettazione di edifici',
+            'Progettazione di opere industriali',
+            'Progettazione di opere geotecniche e fondazioni',
+        ] : [
+            'Structural diagnostics',
+            'Consolidation of existing structures',
+            'Static and seismic vulnerability analysis',
+            'Bridge design',
+            'Building design',
+            'Industrial works design',
+            'Geotechnical works and foundation design',
+        ];
+        // Duplica per loop continuo
+        $items = array_merge($items, $items);
+        @endphp
         @foreach($items as $item)
-        <span class="inline-flex items-center gap-5 mx-5"
-              style="font-style:italic; font-size:1.05rem; color:#4e4030;
-                     font-family:'Cormorant Garamond',serif; font-weight:300;">
-            <span style="color:#c0392b; font-style:normal; font-size:0.55rem;">&#9670;</span>
+        <span class="inline-flex items-center gap-6 mx-8"
+              style="font-family:'Cormorant Garamond',serif; font-style:italic;
+                     font-size:1.25rem; font-weight:400; color:#1a1510; letter-spacing:0.02em;">
+            <span style="color:#c0392b; font-style:normal; font-size:0.5rem; flex-shrink:0;">&#9670;</span>
             {{ $item }}
         </span>
         @endforeach
@@ -115,14 +122,14 @@
             <p data-animate data-delay="0.22s"
                class="leading-relaxed mb-6" style="color:#4e4030; font-size:1rem;">
                 {{ app()->getLocale() === 'it'
-                    ? 'Ogni progetto è un abito su misura: ascoltiamo il territorio, interpretiamo i vincoli, progettiamo soluzioni che durano. La nostra esperienza spazia dalla progettazione strutturale al recupero di edifici storici, dalla direzione lavori alla sostenibilità NZEB.'
-                    : 'Every project is bespoke: we listen to the territory, interpret the constraints, and design solutions that last. Our expertise spans structural design, historic building restoration, site management and NZEB sustainability.' }}
+                    ? 'Ogni progetto è un abito su misura: ascoltiamo il contesto, interpretiamo i vincoli e progettiamo soluzioni che durano. La nostra esperienza si radica con operosità nell\'ambito delle opere pubbliche di ponti, edifici, opere geotecniche e supporti ai collaudi in fase costruttiva, nonché profonda esperienza ai fini delle valutazioni di vulnerabilità statiche e sismiche di edifici esistenti e storici.'
+                    : 'Every project is bespoke: we listen to the context, interpret the constraints and design solutions that last. Our expertise is deeply rooted in public works — bridges, buildings, geotechnical works and construction-phase testing support — alongside extensive experience in static and seismic vulnerability assessments of existing and historic buildings.' }}
             </p>
             <p data-animate data-delay="0.32s"
                class="leading-relaxed" style="color:#4e4030; font-size:1rem;">
                 {{ app()->getLocale() === 'it'
-                    ? 'Fondata nel 2010, la nostra squadra combina rigore tecnico e sensibilità architettonica per rispondere alle sfide più complesse dell\'ingegneria contemporanea.'
-                    : 'Founded in 2010, our team combines technical rigour and architectural sensibility to meet the most complex challenges of contemporary engineering.' }}
+                    ? 'In attività dal 2021, la nostra metodologia combina rigore tecnico e sensibilità architettonica per rispondere alle sfide più complesse dell\'architettura contemporanea.'
+                    : 'Active since 2021, our methodology combines technical rigour and architectural sensibility to meet the most complex challenges of contemporary architecture.' }}
             </p>
         </div>
     </div>
@@ -136,20 +143,52 @@
                 / {{ app()->getLocale() === 'it' ? 'Cosa facciamo' : 'What we do' }}
             </p>
             <h2 class="font-display font-bold" style="font-size:clamp(1.8rem,4vw,3rem); color:#1a1510;">
-                {{ app()->getLocale() === 'it' ? 'Quattro discipline. Un unico studio.' : 'Four disciplines. One studio.' }}
+                {{ app()->getLocale() === 'it' ? 'Quattro discipline, un unico abito.' : 'Four disciplines, one bespoke fit.' }}
             </h2>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-px" style="background:#d8cdb8;">
             @php $discipline = app()->getLocale() === 'it' ? [
-                ['n'=>'01','t'=>'Progettazione strutturale','d'=>'Calcoli e modellazione FEM per edifici nuovi, ampliamenti e opere speciali. Acciaio, c.a., legno X-Lam, muratura.'],
-                ['n'=>'02','t'=>'Direzione lavori','d'=>'Coordinamento di cantiere, controllo qualità, contabilità. Un solo riferimento dalla prima riunione al collaudo.'],
-                ['n'=>'03','t'=>'Recupero & consolidamento','d'=>'Diagnosi strutturale, miglioramento sismico, restauro di edifici storici e patrimonio vincolato.'],
-                ['n'=>'04','t'=>'Sostenibilità & NZEB','d'=>'Edifici a energia quasi-zero, certificazioni CasaClima e LEED, analisi del ciclo di vita.'],
+                [
+                    'n' => '01',
+                    't' => 'Progettazione strutturale',
+                    'd' => 'Analisi strutturale, modellazione f.e.m. e progetto delle membrature di edifici e ponti in acciaio, muratura e calcestruzzo armato semplice e precompresso.',
+                ],
+                [
+                    'n' => '02',
+                    't' => 'Progettazione geotecnica',
+                    'd' => 'Analisi geotecniche, progetto e verifica di opere di contenimento, quali muri e paratie, nonché sotterranee quali tombini ferroviari e stradali, gallerie e fondazioni di edifici e ponti.',
+                ],
+                [
+                    'n' => '03',
+                    't' => 'Recupero e consolidamento dell\'esistente',
+                    'd' => 'Analisi storico critiche, diagnosi strutturale e progetto di miglioramento e adeguamento statico e sismico di edifici e ponti esistenti e storici.',
+                ],
+                [
+                    'n' => '04',
+                    't' => 'Supporto al collaudo e alla costruzione',
+                    'd' => 'Supporto al Collaudatore nella definizione delle relazioni metodologiche, elaborazione dei risultati e direzione esecutiva del collaudo; supporto all\'Impresa mediante redazione di varianti strutturali, ottimizzazione delle membrature e aggiornamento di carpenterie e distinte armature.',
+                ],
             ] : [
-                ['n'=>'01','t'=>'Structural design','d'=>'FEM calculations and modelling for new buildings, extensions and special works. Steel, r.c., X-Lam timber, masonry.'],
-                ['n'=>'02','t'=>'Site management','d'=>'Site coordination, quality control, accounting. One point of contact from the first meeting to sign-off.'],
-                ['n'=>'03','t'=>'Recovery & consolidation','d'=>'Structural diagnosis, seismic improvement, restoration of historic buildings and protected heritage.'],
-                ['n'=>'04','t'=>'Sustainability & NZEB','d'=>'Nearly zero-energy buildings, CasaClima and LEED certifications, lifecycle analysis.'],
+                [
+                    'n' => '01',
+                    't' => 'Structural design',
+                    'd' => 'Structural analysis, f.e.m. modelling and member design for buildings and bridges in steel, masonry and reinforced or prestressed concrete.',
+                ],
+                [
+                    'n' => '02',
+                    't' => 'Geotechnical design',
+                    'd' => 'Geotechnical analysis, design and verification of retaining structures such as walls and sheet piles, as well as underground works including railway and road culverts, tunnels, and building and bridge foundations.',
+                ],
+                [
+                    'n' => '03',
+                    't' => 'Restoration & consolidation',
+                    'd' => 'Historical and critical analysis, structural diagnosis, and design of static and seismic improvement and upgrading of existing and historic buildings and bridges.',
+                ],
+                [
+                    'n' => '04',
+                    't' => 'Testing & construction support',
+                    'd' => 'Support to the Testing Inspector in defining methodological reports, processing results and overseeing structural testing; support to the Contractor through the preparation of structural variants, member optimisation and updated steelwork drawings and reinforcement schedules.',
+                ],
             ]; @endphp
             @foreach($discipline as $i => $d)
             <div data-animate data-delay="{{ $i * 0.1 }}s"

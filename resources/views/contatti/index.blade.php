@@ -34,26 +34,32 @@
                     <p class="text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">
                         {{ app()->getLocale() === 'it' ? 'Indirizzo' : 'Address' }}
                     </p>
-                    <p class="font-display text-lg" style="color:#1a1510;">Via Roma, 1<br>00100 Roma (RM)</p>
+                    <p class="font-display text-lg" style="color:#1a1510;">Via Sigismondo Castromediano, 48<br>70126 Bari (BA)</p>
                 </div>
                 <div class="border-b pb-6" style="border-color:#d8cdb8;">
                     <p class="text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">Email</p>
-                    <a href="mailto:info@toninoe.it"
-                       class="font-display text-lg transition-colors"
+                    <a href="mailto:antonio.ceglie1@gmail.com"
+                       class="font-display text-lg transition-colors block"
                        style="color:#1a1510;"
                        onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
-                        info@toninoe.it
+                        antonio.ceglie1@gmail.com
+                    </a>
+                    <a href="mailto:antonio.ceglie@ingpec.eu"
+                       class="font-display text-lg transition-colors block mt-1"
+                       style="color:#1a1510;"
+                       onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
+                        antonio.ceglie@ingpec.eu
                     </a>
                 </div>
                 <div>
                     <p class="text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">
                         {{ app()->getLocale() === 'it' ? 'Telefono' : 'Phone' }}
                     </p>
-                    <a href="tel:+390000000000"
+                    <a href="tel:+393458477642"
                        class="font-display text-lg transition-colors"
                        style="color:#1a1510;"
                        onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
-                        +39 00 0000 0000
+                        +39 345 847 7642
                     </a>
                 </div>
             </div>

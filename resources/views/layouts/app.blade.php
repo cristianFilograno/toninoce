@@ -36,14 +36,14 @@
         "url": "{{ config('app.url') }}",
         "address": {
             "@@type": "PostalAddress",
-            "streetAddress": "Via Roma, 1",
-            "addressLocality": "Roma",
-            "postalCode": "00100",
+            "streetAddress": "Via Sigismondo Castromediano, 48",
+            "addressLocality": "Bari",
+            "postalCode": "70126",
             "addressCountry": "IT"
         },
-        "email": "info@toninoe.it",
-        "telephone": "+390000000000",
-        "foundingDate": "2010",
+        "email": "antonio.ceglie1@gmail.com",
+        "telephone": "+393458477642",
+        "foundingDate": "2021",
         "inLanguage": ["it", "en"]
     }
     </script>
@@ -53,14 +53,11 @@
     {{-- ── NAVBAR ─────────────────────────────────────────────────────── --}}
     <nav class="fixed top-0 left-0 right-0 z-50 border-b"
          style="background:rgba(240,234,214,0.95); border-color:#d8cdb8; backdrop-filter:blur(8px);">
-        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
 
             {{-- Logo --}}
-            <a href="{{ route('home') }}"
-               aria-label="TONINOcè — Home"
-               class="font-display font-bold text-lg tracking-tight"
-               style="color:#1a1510;">
-                TONINO<span style="font-style:italic; font-weight:400; color:#c0392b; letter-spacing:0; font-family:'Cormorant Garamond',serif;">cè</span>
+            <a href="{{ route('home') }}" aria-label="TONINOcè — Home">
+                <img src="/images/logo.png" alt="TONINOcè" style="height:46px; width:auto; display:block;">
             </a>
 
             {{-- Menu centrale --}}
@@ -72,7 +69,7 @@
                 ] as $link)
                 @php $active = request()->routeIs($link['route'].'*'); @endphp
                 <a href="{{ route($link['route'], ['locale' => app()->getLocale()]) }}"
-                   class="nav-link text-sm {{ $active ? 'active' : '' }}"
+                   class="nav-link text-base {{ $active ? 'active' : '' }}"
                    style="color:#1a1510; font-weight:{{ $active ? '500' : '400' }};">
                     {{ app()->getLocale() === 'it' ? $link['it'] : $link['en'] }}
                 </a>
@@ -86,7 +83,7 @@
                 <div class="hidden md:block">
                     @php $contattiActive = request()->routeIs('contatti*'); @endphp
                     <a href="{{ route('contatti', ['locale' => app()->getLocale()]) }}"
-                       class="nav-link text-sm font-medium {{ $contattiActive ? 'active' : '' }}"
+                       class="nav-link text-base font-medium {{ $contattiActive ? 'active' : '' }}"
                        style="color:#1a1510;">
                         {{ app()->getLocale() === 'it' ? 'Contatti' : 'Contact' }}
                     </a>
@@ -152,16 +149,16 @@
     </nav>
 
     {{-- Contenuto --}}
-    <main class="pt-14">
+    <main class="pt-16">
         @yield('content')
     </main>
 
     {{-- ── FOOTER ──────────────────────────────────────────────────── --}}
     <footer class="mt-24 border-t py-10" style="border-color:#d8cdb8;">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <span class="font-display font-bold text-base" style="color:#1a1510;">
-                TONINO<span style="font-style:italic; font-weight:400; color:#c0392b; letter-spacing:0; font-family:'Cormorant Garamond',serif;">cè</span>
-            </span>
+            <a href="{{ route('home') }}" aria-label="TONINOcè — Home">
+                <img src="/images/logo.png" alt="TONINOcè" style="height:28px; width:auto; display:block;">
+            </a>
             <p class="text-xs" style="color:#4e4030;">
                 &copy; {{ date('Y') }} TONINOcè. {{ app()->getLocale() === 'it' ? 'Tutti i diritti riservati.' : 'All rights reserved.' }}
             </p>

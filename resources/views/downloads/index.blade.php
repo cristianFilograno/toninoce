@@ -4,8 +4,8 @@
 @section('title', 'Download — TONINOcè')
 
 @section('description', app()->getLocale() === 'it'
-    ? 'Scarica capitolati, schede tecniche, pubblicazioni e documentazione ufficiale di TONINOcè Studio di Ingegneria.'
-    : 'Download specifications, technical sheets, publications and official documentation from TONINOcè Engineering Studio.')
+    ? 'Scarica gratuitamente elaborati scritti, grafici tipologici, applicativi di calcolo e pubblicazioni dalla biblioteca digitale di TONINOcè.'
+    : 'Freely download written documents, technical drawings, calculation tools and publications from the TONINOcè digital library.')
 
 @section('content')
 
@@ -18,47 +18,75 @@
     <h1 class="font-display" style="font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#1a1510; line-height:1.05;">
         Download
     </h1>
-    <p class="mt-4 max-w-lg" style="color:#4e4030;">
-        {{ app()->getLocale() === 'it'
-            ? 'Scarica capitolati, schede tecniche e documentazione ufficiale.'
-            : 'Download specifications, technical sheets and official documentation.' }}
-    </p>
+
+    {{-- Introduzione --}}
+    <div class="mt-8 max-w-3xl space-y-5" style="color:#4e4030; font-size:0.95rem; line-height:1.8;">
+        @if(app()->getLocale() === 'it')
+        <p>
+            Nella sezione è possibile scaricare i file gratuiti, quali elaborati scritti (word) e grafici (dwg) tipologici specifici per diverse opere, nonché applicativi di calcolo (excel) elaborati e dettagliati nel corso dell'esperienza lavorativa. La raccolta consiste in relazioni tecnico strutturali, geotecniche, tavole di carpenterie e distinte armature, organizzate in format e layout di stampa, pronte per la modifica dell'utente; si rendono altresì disponibili applicativi di calcolo, variamente applicati a diversi casi di studio, atti ad eseguire simulazioni numeriche in tema strutturale e geotecnico.
+        </p>
+        <p>
+            Gli applicativi sono collegati a opere progettate negli elaborati tipo, ma costituiscono un calcolo specifico utile all'utente, indipendente dall'utilizzo delle relazioni ed elaborati grafici; la disposizione del materiale è finalizzata al contribuire seppur in minima parte, alla divulgazione, condivisione e progresso della disciplina. Che possa rappresentare per i Colleghi, un utile strumento per implementare qualità e celerità nella redazione degli elaborati, che a volte sono discordi.
+        </p>
+        @else
+        <p>
+            This section offers free downloads including written documents (Word) and typological drawings (DWG) specific to various types of works, as well as calculation tools (Excel) developed and refined over years of professional experience. The collection comprises structural and geotechnical technical reports, steelwork drawings and reinforcement schedules, organised in print-ready formats and layouts; calculation applications are also available, applied to various case studies and suited to running numerical simulations in structural and geotechnical engineering.
+        </p>
+        <p>
+            The tools are linked to works designed in the template documents, but each constitutes a self-contained calculation useful to the user, independently of the reports and drawings. The material is shared with the aim of contributing, however modestly, to the dissemination, exchange and advancement of the discipline — and may serve as a practical instrument for colleagues seeking to improve the quality and efficiency of their documentation.
+        </p>
+        @endif
+
+    </div>
 </section>
 
 {{-- 4 Macro categorie --}}
 @php
+$locale = app()->getLocale();
 $macroCategorie = [
     [
         'id'     => 'relazioni',
-        'label'  => 'Relazioni tecniche',
+        'label'  => $locale === 'it' ? 'Relazioni tecniche' : 'Technical reports',
         'format' => 'Word',
         'tipi'   => ['doc','docx'],
         'icon'   => 'M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z',
         'color'  => '#3b82f6',
+        'desc'   => $locale === 'it'
+            ? 'Gli elaborati sono composti ai sensi delle Norme vigenti (NTC18), per come indicato nel capitolo 10 sulla composizione degli stessi. Il format è impostato su Palatino Linotype, dimensione 11 e interlinea 1,5; i titoli sono suddivisi per livelli di riferimento con indice dotato di collegamento ipertestuale diretto.'
+            : 'Documents are drafted in accordance with current Standards (NTC18), as set out in chapter 10. The format uses Palatino Linotype, size 11, 1.5 line spacing; headings are structured across reference levels with a directly hyperlinked table of contents.',
     ],
     [
         'id'     => 'pubblicazioni',
-        'label'  => 'Pubblicazioni',
+        'label'  => $locale === 'it' ? 'Pubblicazioni' : 'Publications',
         'format' => 'PDF',
         'tipi'   => ['pdf'],
         'icon'   => 'M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z',
+        'desc'   => $locale === 'it'
+            ? 'La sezione raccoglie la biblioteca personale, condivisa nell\'ambito di una sana divulgazione della disciplina. Articoli e libri disponibili su internet sono organizzati per tipologia, costituendo una biblioteca digitale a disposizione degli utenti appassionati del settore.'
+            : 'This section gathers a personal library, shared in the spirit of open dissemination of the discipline. Articles and books available online are organised by type, forming a digital library for users with a passion for the field.',
         'color'  => '#ef4444',
     ],
     [
         'id'     => 'software',
-        'label'  => 'Software di calcolo',
+        'label'  => $locale === 'it' ? 'Software di calcolo' : 'Calculation tools',
         'format' => 'Excel',
         'tipi'   => ['xls','xlsx'],
         'icon'   => 'M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zm-3 8l-1.5-2.5L7 17H5.5l2.25-3.5L5.5 10H7l1.5 2.5L10 10h1.5l-2.25 3.5L11.5 17H10z',
         'color'  => '#22c55e',
+        'desc'   => $locale === 'it'
+            ? 'Gli applicativi sviluppati eseguono analisi di dimensionamento e verifica di membrature strutturali e geotecniche. Strutturati per semplicità d\'uso, presentano la teoria di base e producono risultati in formato tabellare, pronti per l\'inserimento nelle relazioni mediante cattura schermo.'
+            : 'The developed tools perform sizing and verification analyses for structural and geotechnical members. Designed for ease of use, they include background theory and deliver results in tabular format, ready for inclusion in reports via screenshot.',
     ],
     [
         'id'     => 'carpenterie',
-        'label'  => 'Carpenterie & distinte',
+        'label'  => $locale === 'it' ? 'Carpenterie & distinte' : 'Drawings & schedules',
         'format' => 'DWG',
         'tipi'   => ['dwg','dxf','dwf'],
         'icon'   => 'M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18',
         'color'  => '#f59e0b',
+        'desc'   => $locale === 'it'
+            ? 'Le carpenterie, distinte armature e unioni in acciaio sono suddivise per tipologia di opera e tavola, con scale e layout predefiniti pronti per la stampa diretta dalla finestra del modello.'
+            : 'Steelwork drawings, reinforcement schedules and steel connections are organised by work type and sheet, with predefined scales and layouts ready for direct printing from the model window.',
     ],
 ];
 @endphp
@@ -124,6 +152,13 @@ $macroCategorie = [
         {{-- Pannello espandibile --}}
         <div id="macro-{{ $macro['id'] }}" class="progetto-detail border-t" style="border-color:#d8cdb8;">
             <div class="px-6 py-6">
+
+                {{-- Descrizione categoria --}}
+                @if(!empty($macro['desc']))
+                <p class="text-sm leading-relaxed mb-6 pb-6 border-b max-w-3xl" style="color:#4e4030; border-color:#e8e0cc;">
+                    {{ $macro['desc'] }}
+                </p>
+                @endif
 
                 @if($totale === 0)
                 <p class="text-sm py-4 text-center" style="color:#b5a898; font-style:italic;">
