@@ -33,14 +33,6 @@
             from { width: 0; opacity: 0; }
             to   { width: 4rem; opacity: 1; }
         }
-        @keyframes writeReveal {
-            from { clip-path: inset(0 100% 0 0); opacity: 1; }
-            to   { clip-path: inset(0 0% 0 0);   opacity: 1; }
-        }
-        @keyframes cursorBlink {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0; }
-        }
         #hero-logo {
             animation: logoReveal 1.4s cubic-bezier(0.16,1,0.3,1) 0.1s both;
         }
@@ -48,22 +40,11 @@
             animation: lineExpand 0.5s ease-out 1.2s both;
         }
         #hero-tagline-wrap {
-            position: relative;
             display: inline-block;
-            opacity: 0;
-            animation: none;
-        }
-        #hero-tagline-wrap.start-write {
-            opacity: 1;
         }
         #hero-tagline {
             display: inline-block;
-            clip-path: inset(0 100% 0 0);
         }
-        #hero-tagline.start-write {
-            animation: writeReveal 1.3s cubic-bezier(0.4,0,0.2,1) forwards;
-        }
-        #hero-cursor { display: none; }
     </style>
 </head>
 <body class="bg-graph overflow-hidden h-screen" style="color:#1a1510;">
@@ -82,9 +63,10 @@
                 <div class="hero-line h-px" style="background:#d8cdb8;"></div>
                 <span id="hero-tagline-wrap">
                     <span id="hero-tagline"
-                          style="font-family:'Cormorant Garamond',serif; font-style:italic;
-                                 font-size:1.7rem; font-weight:300; color:#4e4030; letter-spacing:0.08em;">
-                        Sartoria per l'Ingegneria
+                          style="font-family:'Inter',sans-serif; font-style:normal;
+                                 font-size:1rem; font-weight:600; color:#1a1510;
+                                 letter-spacing:0.35em; text-transform:uppercase;">
+                        Ingegneria dal 2022
                     </span>
                     <span id="hero-cursor"></span>
                 </span>
@@ -131,25 +113,7 @@
     </div>
 
     <script>
-        // ── Scrittura tagline ─────────────────────────────────────────
-        window.addEventListener('load', function () {
-            setTimeout(function () {
-                var wrap    = document.getElementById('hero-tagline-wrap');
-                var tagline = document.getElementById('hero-tagline');
-                var cursor  = document.getElementById('hero-cursor');
-                // Mostra il cursore e avvia la scrittura
-                wrap.classList.add('start-write');
-                cursor.style.opacity = '1';
-                tagline.classList.add('start-write');
-                // Dopo la scrittura il cursore lampeggia 3 volte poi scompare
-                setTimeout(function () {
-                    cursor.classList.add('blinking');
-                    setTimeout(function () { cursor.style.opacity = '0'; }, 1800);
-                }, 2000);
-            }, 900); // parte dopo che il logo è apparso
-        });
-
-        var _fly = false;
+var _fly = false;
         function handleLocale(e, url) {
             e.preventDefault();
             if (_fly) return;
