@@ -6,22 +6,34 @@
     ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, costruzione e consolidamento del costruito. Ingegnere dal 2022.'
     : 'TONINOcè is a structural engineering studio specialised in design, construction and consolidation of existing buildings. Engineer since 2022.')
 
+@section('head')
+<style>
+    /* Comparsa al caricamento della pagina (hero chi-siamo) */
+    @keyframes heroReveal {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-reveal {
+        animation: heroReveal 0.9s cubic-bezier(0.16,1,0.3,1) both;
+    }
+</style>
+@endsection
+
 @section('content')
 
 {{-- ── HERO ─────────────────────────────────────────────────────── --}}
 <section class="min-h-[85vh] flex flex-col justify-center">
     <div class="max-w-7xl mx-auto px-6 py-24">
 
-        <div data-animate data-delay="0.05s" class="flex items-center gap-4 mb-10">
+        <div class="hero-reveal flex items-center gap-4 mb-10" style="animation-delay:0.05s;">
             <div class="w-8 h-px" style="background:#c0392b;"></div>
             <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
                 {{ app()->getLocale() === 'it' ? 'Studio d\'Ingegneria · Ingegnere dal 2022' : 'Engineering Studio · Engineer since 2022' }}
             </p>
         </div>
 
-        <h1 data-animate data-delay="0.15s"
-            class="font-display leading-[1.05] mb-8"
-            style="font-size:clamp(3rem,8vw,7.5rem); font-weight:900; color:#1a1510; max-width:15ch;">
+        <h1 class="hero-reveal font-display leading-[1.05] mb-8"
+            style="font-size:clamp(3rem,8vw,7.5rem); font-weight:900; color:#1a1510; max-width:15ch; animation-delay:0.15s;">
             {{ app()->getLocale() === 'it' ? 'Costruire con' : 'Building with' }}
             <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
                 {{ app()->getLocale() === 'it' ? 'precisione,' : 'precision,' }}
@@ -32,16 +44,14 @@
             </span>
         </h1>
 
-        <p data-animate data-delay="0.28s"
-           class="mb-12 max-w-lg leading-relaxed"
-           style="font-size:1.125rem; color:#4e4030; font-weight:300;">
+        <p class="hero-reveal mb-12 max-w-lg leading-relaxed"
+           style="font-size:1.125rem; color:#4e4030; font-weight:300; animation-delay:0.28s;">
             {{ app()->getLocale() === 'it'
                 ? 'Antonio Ceglie, al secolo come Toninocè, è un ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito. Operiamo dove la tecnica incontra la cura del dettaglio.'
                 : 'Antonio Ceglie, known as Toninocè, is a structural engineer specialised in design, construction and consolidation of existing buildings. We work where technique meets attention to detail.' }}
         </p>
 
-        <div data-animate data-delay="0.4s"
-             class="flex flex-wrap justify-center md:justify-start items-center gap-4">
+        <div class="hero-reveal flex flex-wrap justify-center md:justify-start items-center gap-4" style="animation-delay:0.4s;">
             <a href="{{ route('progetti', ['locale' => app()->getLocale()]) }}"
                class="inline-flex items-center gap-2 px-7 py-3.5 font-medium text-sm transition-all duration-200"
                style="background:#1a1510; color:#f0ead6;"
@@ -88,10 +98,11 @@
         $items = array_merge($items, $items);
         @endphp
         @foreach($items as $item)
-        <span class="inline-flex items-center gap-6 mx-8"
-              style="font-family:'Cormorant Garamond',serif; font-style:italic;
+        <span style="display:inline-flex; align-items:center; margin:0 2rem;
+                     font-family:'Cormorant Garamond',serif; font-style:italic;
                      font-size:1.25rem; font-weight:400; color:#1a1510; letter-spacing:0.02em;">
-            <span style="color:#c0392b; font-style:normal; font-size:0.5rem; flex-shrink:0;">&#9670;</span>
+            <span style="color:#c0392b; font-style:normal; font-size:0.5rem;
+                         flex-shrink:0; margin-right:1.2rem;">&#9670;</span>
             {{ $item }}
         </span>
         @endforeach

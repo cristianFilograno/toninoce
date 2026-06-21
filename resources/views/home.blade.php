@@ -14,30 +14,21 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         @view-transition { navigation: none; }
-        #main-content {
-            transition: transform 0.7s cubic-bezier(0.2,0,0.8,1), opacity 0.65s ease-in;
-            transform-origin: center center;
-        }
-        #main-content.fly-out { transform: scale(3.5); opacity: 0; }
 
-        @keyframes logoReveal {
-            0%   { opacity: 0; transform: translateY(28px) scale(0.97); filter: blur(6px); }
-            60%  { filter: blur(0); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        /* Dissolvenza in uscita: scompare tutto tranne lo sfondo bg-graph (comune con le altre pagine) */
+        .fade-target {
+            transition: opacity 0.6s ease;
         }
-        @keyframes lineExpand {
-            from { width: 0; opacity: 0; }
-            to   { width: 4rem; opacity: 1; }
+        .fade-target.fly-out {
+            opacity: 0 !important;
         }
-        #hero-logo {
-            animation: logoReveal 1.4s cubic-bezier(0.16,1,0.3,1) 0.1s both;
-        }
+
         .hero-line {
-            animation: lineExpand 0.5s ease-out 1.2s both;
+            width: 4rem;
         }
         #hero-tagline-wrap {
             display: inline-block;
@@ -45,30 +36,54 @@
         #hero-tagline {
             display: inline-block;
         }
+
+        /* Bottoni lingua */
+        .home-lang {
+            padding: 1.1rem 2rem;
+            transition: opacity 0.25s ease;
+            text-decoration: none;
+        }
+        .home-lang:hover {
+            opacity: 0.7;
+        }
+
+        /* Line drawing — il disegno si traccia da sinistra verso destra */
+        @keyframes velaDraw {
+            from { clip-path: inset(0 100% 0 0); }
+            to   { clip-path: inset(0 0%   0 0); }
+        }
+        #vela-img {
+            animation: velaDraw 6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+        }
     </style>
 </head>
 <body class="bg-graph overflow-hidden h-screen" style="color:#1a1510;">
 
-    <div id="main-content" class="h-screen flex flex-col items-center justify-center px-6">
+    {{-- Immagine decorativa bottom-left --}}
+    <img id="vela-img" src="/images/VELA.png" alt=""
+         class="fade-target"
+         style="position:fixed; bottom:6vh; left:6vw; width:52vw; max-width:780px;
+                opacity:0.7; pointer-events:none; z-index:0; display:block;
+                object-fit:contain; object-position:bottom left;">
+
+    <div id="main-content" class="fade-target h-screen flex flex-col items-center justify-center px-6" style="position:relative; z-index:1;">
 
         {{-- Logo mark --}}
-        <div class="text-center mb-16 select-none">
-            <h1>
-                <img id="hero-logo"
-                     src="/images/logo.png"
-                     alt="TONINOcè"
-                     style="height:clamp(5rem,16vw,13rem); width:auto; display:block; margin:0 auto;">
-            </h1>
-            <div class="flex items-center justify-center gap-5 mt-6">
+        <div class="text-center mb-12 select-none">
+            <h1 class="sr-only">TONINOcè — Studio di Ingegneria Strutturale</h1>
+            <img id="hero-logo"
+                 src="/images/logo.png"
+                 alt="TONINOcè"
+                 style="height:clamp(8rem,24vw,20rem); width:auto; display:block; margin:0 auto;">
+            <div class="flex items-center justify-center gap-5 mt-1">
                 <div class="hero-line h-px" style="background:#d8cdb8;"></div>
                 <span id="hero-tagline-wrap">
                     <span id="hero-tagline"
-                          style="font-family:'Inter',sans-serif; font-style:normal;
-                                 font-size:1rem; font-weight:600; color:#1a1510;
-                                 letter-spacing:0.35em; text-transform:uppercase;">
+                          style="font-family:'Palatino Linotype','Palatino','Book Antiqua',serif;
+                                 font-style:normal; font-size:1.6rem; font-weight:600;
+                                 color:#1a1510; letter-spacing:0.35em; text-transform:uppercase;">
                         Ingegneria dal 2022
                     </span>
-                    <span id="hero-cursor"></span>
                 </span>
                 <div class="hero-line h-px" style="background:#d8cdb8;"></div>
             </div>
@@ -89,7 +104,6 @@
                               color:#4e4030; letter-spacing:0.15em;">
                     Italiano
                 </span>
-                <div class="home-lang-bar" style="height:1px; background:#c0392b; width:0; transition:width 0.35s cubic-bezier(0.4,0,0.2,1);"></div>
             </a>
 
             <div style="width:1px; height:40px; background:#d8cdb8;"></div>
@@ -106,7 +120,6 @@
                               color:#4e4030; letter-spacing:0.15em;">
                     English
                 </span>
-                <div class="home-lang-bar" style="height:1px; background:#c0392b; width:0; transition:width 0.35s cubic-bezier(0.4,0,0.2,1);"></div>
             </a>
 
         </div>
@@ -118,18 +131,18 @@ var _fly = false;
             e.preventDefault();
             if (_fly) return;
             _fly = true;
-            document.getElementById('main-content').classList.add('fly-out');
-            setTimeout(function(){ window.location.href = url; }, 650);
+            document.querySelectorAll('.fade-target').forEach(function (el) {
+                el.classList.add('fly-out');
+            });
+            setTimeout(function(){ window.location.href = url; }, 600);
         }
 
         document.querySelectorAll('.home-lang').forEach(function(el) {
             el.addEventListener('mouseenter', function() {
                 el.querySelector('.home-lang-label').style.color = '#c0392b';
-                el.querySelector('.home-lang-bar').style.width   = '100%';
             });
             el.addEventListener('mouseleave', function() {
                 el.querySelector('.home-lang-label').style.color = '#4e4030';
-                el.querySelector('.home-lang-bar').style.width   = '0';
             });
         });
     </script>
