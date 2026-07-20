@@ -19,8 +19,8 @@
     </span>
 
     {{-- Titolo + descrizione --}}
-    <div class="flex-1 min-w-0 flex gap-4 items-baseline">
-        <span class="text-sm flex-shrink-0" style="color:#1a1510; width:25%;">{{ $titolo }}</span>
+    <div class="flex-1 min-w-0 flex flex-col sm:flex-row gap-0.5 sm:gap-4 sm:items-baseline">
+        <span class="text-sm flex-shrink-0 sm:w-1/4" style="color:#1a1510;">{{ $titolo }}</span>
         @if($descrizione)
         <span class="text-sm truncate flex-1" style="color:#4e4030;">{{ $descrizione }}</span>
         @endif

@@ -78,7 +78,7 @@
             <form action="{{ route('contatti.store', ['locale' => app()->getLocale()]) }}" method="POST" class="space-y-5">
                 @csrf
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">
                             {{ app()->getLocale() === 'it' ? 'Nome *' : 'Name *' }}
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">
                             {{ app()->getLocale() === 'it' ? 'Telefono' : 'Phone' }}

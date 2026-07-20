@@ -65,7 +65,7 @@
                          alt="{{ $titolo }}{{ $idx > 0 ? ' — ' . ($locale === 'it' ? 'foto' : 'photo') . ' ' . ($idx+1) : '' }}"
                          draggable="false"
                          onclick="openLightbox(this.src, this.alt)"
-                         style="width:100%; flex-shrink:0; height:520px; object-fit:cover; display:block;
+                         style="width:100%; flex-shrink:0; height:clamp(260px,55vw,520px); object-fit:cover; display:block;
                                 cursor:zoom-in;">
                     @endforeach
                 </div>
@@ -111,7 +111,7 @@
         </div>
 
         {{-- Scheda tecnica --}}
-        <div class="border-l pl-10 pt-16" style="border-color:#d8cdb8;">
+        <div class="border-t pt-8 md:border-t-0 md:pt-16 md:border-l md:pl-10" style="border-color:#d8cdb8;">
             <p class="text-[10px] tracking-[0.3em] uppercase mb-8 font-medium" style="color:#c0392b;">
                 {{ $locale === 'it' ? 'Scheda tecnica' : 'Project details' }}
             </p>

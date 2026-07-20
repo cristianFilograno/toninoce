@@ -162,7 +162,7 @@ $macroCategorie = [
 
                 @if($totale === 0)
                 <p class="text-sm py-4 text-center" style="color:#b5a898; font-style:italic;">
-                    Nessun documento disponibile in questa categoria.
+                    {{ app()->getLocale() === 'it' ? 'Nessun documento disponibile in questa categoria.' : 'No documents available in this category.' }}
                 </p>
                 @else
 

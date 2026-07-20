@@ -16,6 +16,9 @@
     .hero-reveal {
         animation: heroReveal 0.9s cubic-bezier(0.16,1,0.3,1) both;
     }
+    @media (prefers-reduced-motion: reduce) {
+        .hero-reveal { animation: none; }
+    }
 </style>
 @endsection
 
@@ -47,8 +50,8 @@
         <p class="hero-reveal mb-12 max-w-lg leading-relaxed"
            style="font-size:1.125rem; color:#4e4030; font-weight:300; animation-delay:0.28s;">
             {{ app()->getLocale() === 'it'
-                ? 'Antonio Ceglie, al secolo come Toninocè, è un ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito. Operiamo dove la tecnica incontra la cura del dettaglio.'
-                : 'Antonio Ceglie, known as Toninocè, is a structural engineer specialised in design, construction and consolidation of existing buildings. We work where technique meets attention to detail.' }}
+                ? 'Antonio Ceglie, in arte Tonino, è ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito. Operiamo dove la tecnica incontra la cura del dettaglio.'
+                : 'Antonio Ceglie, known as Tonino, is a structural engineer specialised in design, construction and consolidation of existing buildings. We work where technique meets attention to detail.' }}
         </p>
 
         <div class="hero-reveal flex flex-wrap justify-center md:justify-start items-center gap-4" style="animation-delay:0.4s;">

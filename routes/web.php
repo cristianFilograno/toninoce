@@ -18,14 +18,10 @@ Route::prefix('{locale}')
     ->middleware('setlocale')
     ->group(function () {
 
-        // Chi siamo (v1 = classica, v2 = new age)
+        // Chi siamo
         Route::get('chi-siamo', function () {
             return view('chi-siamo');
         })->name('chi-siamo');
-
-        Route::get('chi-siamo-v2', function () {
-            return view('chi-siamo-v2');
-        })->name('chi-siamo-v2');
 
         // Progetti
         Route::get('progetti', [ProgettoController::class, 'index'])->name('progetti');

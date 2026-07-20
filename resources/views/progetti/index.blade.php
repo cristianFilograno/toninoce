@@ -282,12 +282,9 @@
 function applyRowGrids() {
     var w = window.innerWidth;
     document.querySelectorAll('[data-has-photo]').forEach(function(row) {
-        var hasPhoto = row.dataset.hasPhoto === '1';
         if (w >= 1024) {
             // lg: foto | nome | luogo | cat | arrow
-            row.style.gridTemplateColumns = hasPhoto
-                ? '180px 1fr 140px 120px 40px'
-                : '180px 1fr 140px 120px 40px';
+            row.style.gridTemplateColumns = '180px 1fr 140px 120px 40px';
         } else if (w >= 768) {
             // md: foto | nome | arrow
             row.style.gridTemplateColumns = '180px 1fr 40px';

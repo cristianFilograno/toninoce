@@ -19,7 +19,7 @@
     <style>
         @view-transition { navigation: none; }
 
-        /* Dissolvenza in uscita: scompare tutto tranne lo sfondo bg-graph (comune con le altre pagine) */
+        /* ── Dissolvenza in uscita: resta solo lo sfondo bg-graph (comune alle altre pagine) ── */
         .fade-target {
             transition: opacity 0.6s ease;
         }
@@ -27,17 +27,22 @@
             opacity: 0 !important;
         }
 
+        /* ── Hero ── */
         .hero-line {
-            width: 4rem;
-        }
-        #hero-tagline-wrap {
-            display: inline-block;
+            width: clamp(1.5rem, 5vw, 4rem);
         }
         #hero-tagline {
             display: inline-block;
+            font-family: 'Palatino Linotype', 'Palatino', 'Book Antiqua', serif;
+            font-size: clamp(0.85rem, 2.6vw, 1.6rem);
+            font-weight: 600;
+            color: #1a1510;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        /* Bottoni lingua */
+        /* ── Bottoni lingua ── */
         .home-lang {
             padding: 1.1rem 2rem;
             transition: opacity 0.25s ease;
@@ -47,17 +52,55 @@
             opacity: 0.7;
         }
 
-        /* Line drawing — il disegno si traccia da sinistra verso destra */
-        @keyframes velaDraw {
+        /* ── Line drawing: sinistra → destra (VELA, BUILD) ── */
+        @keyframes drawLR {
             from { clip-path: inset(0 100% 0 0); }
-            to   { clip-path: inset(0 0%   0 0); }
+            to   { clip-path: inset(0 0    0 0); }
         }
-        #vela-img {
-            animation: velaDraw 6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+        /* ── Line drawing: destra → sinistra (FORMULA) ── */
+        @keyframes drawRL {
+            from { clip-path: inset(0 0 0 100%); }
+            to   { clip-path: inset(0 0 0 0);    }
+        }
+        #vela-img    { animation: drawLR 3.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both; }
+        #build-img   { animation: drawLR 3s   cubic-bezier(0.4, 0, 0.2, 1) 1.4s both; }
+        #formula-img { animation: drawRL 3.5s cubic-bezier(0.4, 0, 0.2, 1) 4s   both; }
+
+        /* ── Responsive immagini decorative ── */
+        /* Tablet: si riducono e si attenuano per non disturbare il contenuto centrale */
+        @media (max-width: 1023px) {
+            #formula-img { width: 34vw !important; opacity: 0.35 !important; }
+            #build-img   { width: 44vw !important; opacity: 0.4  !important; }
+            #vela-img    { width: 60vw !important; opacity: 0.5  !important; }
+        }
+        /* Phone: resta solo la VELA, leggera, in basso */
+        @media (max-width: 639px) {
+            #formula-img, #build-img { display: none !important; }
+            #vela-img { width: 88vw !important; opacity: 0.4 !important; left: 4vw !important; bottom: 3vh !important; }
+        }
+
+        /* ── Accessibilità: rispetta la preferenza di riduzione del movimento ── */
+        @media (prefers-reduced-motion: reduce) {
+            #vela-img, #build-img, #formula-img { animation: none; }
+            .fade-target { transition: none; }
         }
     </style>
 </head>
 <body class="bg-graph overflow-hidden h-screen" style="color:#1a1510;">
+
+    {{-- Immagine decorativa top-left --}}
+    <img id="formula-img" src="/images/FORMULA.png" alt=""
+         class="fade-target"
+         style="position:fixed; top:3vh; left:3vw;
+                width:28vw; max-width:420px;
+                opacity:0.55; pointer-events:none; z-index:0; display:block;">
+
+    {{-- Immagine decorativa right --}}
+    <img id="build-img" src="/images/BUILD.png" alt=""
+         class="fade-target"
+         style="position:fixed; top:69%; right:0vw; transform:translateY(-50%);
+                width:50vw; max-width:510px;
+                opacity:0.6; pointer-events:none; z-index:0; display:block;">
 
     {{-- Immagine decorativa bottom-left --}}
     <img id="vela-img" src="/images/VELA.png" alt=""
@@ -75,22 +118,15 @@
                  src="/images/logo.png"
                  alt="TONINOcè"
                  style="height:clamp(8rem,24vw,20rem); width:auto; display:block; margin:0 auto;">
-            <div class="flex items-center justify-center gap-5 mt-1">
+            <div class="flex items-center justify-center gap-3 sm:gap-5 mt-1">
                 <div class="hero-line h-px" style="background:#d8cdb8;"></div>
-                <span id="hero-tagline-wrap">
-                    <span id="hero-tagline"
-                          style="font-family:'Palatino Linotype','Palatino','Book Antiqua',serif;
-                                 font-style:normal; font-size:1.6rem; font-weight:600;
-                                 color:#1a1510; letter-spacing:0.35em; text-transform:uppercase;">
-                        Ingegneria dal 2022
-                    </span>
-                </span>
+                <span id="hero-tagline">Ingegneria dal 2022</span>
                 <div class="hero-line h-px" style="background:#d8cdb8;"></div>
             </div>
         </div>
 
         {{-- Scelta lingua --}}
-        <div class="flex items-center gap-12">
+        <div class="flex items-center gap-6 sm:gap-12">
 
             <a href="{{ route('set-locale', 'it') }}"
                onclick="handleLocale(event, this.href)"
@@ -126,7 +162,7 @@
     </div>
 
     <script>
-var _fly = false;
+        var _fly = false;
         function handleLocale(e, url) {
             e.preventDefault();
             if (_fly) return;
