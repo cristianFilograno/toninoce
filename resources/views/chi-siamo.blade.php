@@ -25,8 +25,29 @@
 @section('content')
 
 {{-- ── HERO ─────────────────────────────────────────────────────── --}}
-<section class="min-h-[85vh] flex flex-col justify-center">
-    <div class="max-w-7xl mx-auto px-6 py-24">
+<section class="min-h-[85vh] flex flex-col justify-center" style="position:relative; overflow:hidden;">
+
+    {{-- Immagine decorativa a destra del titolo --}}
+    <div class="hero-reveal hidden lg:block"
+         style="position:absolute; top:6%; right:2vw;
+                width:32vw; max-width:560px;
+                pointer-events:none; z-index:0;
+                animation-delay:0.5s;">
+        <img src="/images/STADIO.png" alt=""
+             style="width:100%; display:block; opacity:0.4; transform:rotate(10deg);">
+    </div>
+
+    {{-- Immagine decorativa in basso a destra (accanto ai bottoni) --}}
+    <div class="hero-reveal hidden lg:block"
+         style="position:absolute; bottom:0; right:12vw;
+                width:34vw; max-width:600px;
+                pointer-events:none; z-index:0;
+                animation-delay:0.65s;">
+        <img src="/images/ALBERO.png" alt=""
+             style="width:100%; display:block; opacity:0.4;">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-24" style="position:relative; z-index:1;">
 
         <div class="hero-reveal flex items-center gap-4 mb-10" style="animation-delay:0.05s;">
             <div class="w-8 h-px" style="background:#c0392b;"></div>

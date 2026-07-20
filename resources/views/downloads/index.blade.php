@@ -10,7 +10,17 @@
 @section('content')
 
 {{-- Hero --}}
-<section class="py-20 max-w-7xl mx-auto px-6">
+<section class="py-20 max-w-7xl mx-auto px-6" style="position:relative;">
+
+    {{-- Immagine decorativa accanto all'introduzione --}}
+    <div class="hidden lg:block"
+         style="position:absolute; top:55%; right:4vw; transform:translateY(-50%);
+                width:26vw; max-width:460px;
+                pointer-events:none; z-index:0;">
+        <img src="/images/VILLAGGIO.png" alt=""
+             style="width:100%; display:block; opacity:0.4;">
+    </div>
+
     <div class="flex items-center gap-4 mb-6">
         <div class="w-8 h-px" style="background:#c0392b;"></div>
         <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">{{ app()->getLocale() === 'it' ? 'Documenti' : 'Documents' }}</p>

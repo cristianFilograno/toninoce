@@ -10,15 +10,26 @@
 @section('content')
 
 {{-- Hero --}}
-<section class="py-20 max-w-7xl mx-auto px-6">
-    <div data-animate class="flex items-center gap-4 mb-6">
+<section class="py-20 max-w-7xl mx-auto px-6" style="position:relative;">
+
+    {{-- Immagine decorativa a destra del titolo --}}
+    <div data-animate="fade" data-delay="0.3s"
+         class="hidden lg:block"
+         style="position:absolute; top:50%; right:7.5vw; transform:translateY(-50%);
+                width:22vw; max-width:380px;
+                pointer-events:none; z-index:0;">
+        <img src="/images/UNI.png" alt=""
+             style="width:100%; display:block; opacity:0.4; transform:scaleX(1.24);">
+    </div>
+
+    <div data-animate class="flex items-center gap-4 mb-6" style="position:relative; z-index:1;">
         <div class="w-8 h-px" style="background:#c0392b;"></div>
         <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
             {{ app()->getLocale() === 'it' ? 'Portafoglio' : 'Portfolio' }}
         </p>
     </div>
     <h1 data-animate data-delay="0.1s"
-        class="font-display" style="font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#1a1510; line-height:1.05;">
+        class="font-display" style="font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#1a1510; line-height:1.05; position:relative; z-index:1;">
         {{ app()->getLocale() === 'it' ? 'I nostri progetti' : 'Our projects' }}
     </h1>
 </section>
