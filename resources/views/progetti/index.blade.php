@@ -25,7 +25,7 @@
     <div data-animate class="flex items-center gap-4 mb-6" style="position:relative; z-index:1;">
         <div class="w-8 h-px" style="background:#c0392b;"></div>
         <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
-            {{ app()->getLocale() === 'it' ? 'Portafoglio' : 'Portfolio' }}
+            {{ app()->getLocale() === 'it' ? 'Portfolio' : 'Portfolio' }}
         </p>
     </div>
     <h1 data-animate data-delay="0.1s"

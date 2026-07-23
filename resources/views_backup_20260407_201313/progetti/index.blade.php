@@ -9,7 +9,7 @@
 <section class="bg-gray-950 text-white py-24">
     <div class="max-w-7xl mx-auto px-6">
         <p class="text-sm tracking-[0.3em] uppercase text-gray-500 mb-4">
-            {{ app()->getLocale() === 'it' ? 'Portafoglio' : 'Portfolio' }}
+            {{ app()->getLocale() === 'it' ? 'Portfolio' : 'Portfolio' }}
         </p>
         <h1 class="font-display text-4xl md:text-6xl font-light">
             {{ app()->getLocale() === 'it' ? 'I nostri progetti' : 'Our projects' }}

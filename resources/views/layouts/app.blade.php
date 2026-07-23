@@ -160,7 +160,7 @@
                 <img src="/images/logo.png" alt="TONINOcè" style="height:28px; width:auto; display:block;">
             </a>
             <p class="text-xs" style="color:#4e4030;">
-                &copy; {{ date('Y') }} TONINOcè. {{ app()->getLocale() === 'it' ? 'Tutti i diritti riservati.' : 'All rights reserved.' }}
+                &copy; {{ date('Y') }} Antonio Ceglie — {{ app()->getLocale() === 'it' ? 'Tutti i diritti riservati.' : 'All rights reserved.' }}
             </p>
             <div class="flex gap-6">
                 <a href="{{ route('chi-siamo', ['locale' => app()->getLocale()]) }}"

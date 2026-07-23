@@ -29,12 +29,12 @@
 
     {{-- Immagine decorativa a destra del titolo --}}
     <div class="hero-reveal hidden lg:block"
-         style="position:absolute; top:6%; right:2vw;
+         style="position:absolute; top:6%; right:3vw;
                 width:32vw; max-width:560px;
                 pointer-events:none; z-index:0;
                 animation-delay:0.5s;">
         <img src="/images/STADIO.png" alt=""
-             style="width:100%; display:block; opacity:0.4; transform:rotate(10deg);">
+             style="width:100%; display:block; opacity:0.4; transform:rotate(-7.1deg);">
     </div>
 
     {{-- Immagine decorativa in basso a destra (accanto ai bottoni) --}}
@@ -52,7 +52,7 @@
         <div class="hero-reveal flex items-center gap-4 mb-10" style="animation-delay:0.05s;">
             <div class="w-8 h-px" style="background:#c0392b;"></div>
             <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
-                {{ app()->getLocale() === 'it' ? 'Studio d\'Ingegneria · Ingegnere dal 2022' : 'Engineering Studio · Engineer since 2022' }}
+                {{ app()->getLocale() === 'it' ? 'Ingegnere dal 2022' : 'Engineer since 2022' }}
             </p>
         </div>
 
@@ -122,11 +122,11 @@
         $items = array_merge($items, $items);
         @endphp
         @foreach($items as $item)
-        <span style="display:inline-flex; align-items:center; margin:0 2rem;
+        <span style="display:inline-flex; align-items:center;
                      font-family:'Cormorant Garamond',serif; font-style:italic;
                      font-size:1.25rem; font-weight:400; color:#1a1510; letter-spacing:0.02em;">
             <span style="color:#c0392b; font-style:normal; font-size:0.5rem;
-                         flex-shrink:0; margin-right:1.2rem;">&#9670;</span>
+                         flex-shrink:0; margin:0 2rem;">&#9670;</span>
             {{ $item }}
         </span>
         @endforeach
@@ -163,8 +163,8 @@
             <p data-animate data-delay="0.32s"
                class="leading-relaxed" style="color:#4e4030; font-size:1rem;">
                 {{ app()->getLocale() === 'it'
-                    ? 'In attività dal 2021, la nostra metodologia combina rigore tecnico e sensibilità architettonica per rispondere alle sfide più complesse dell\'architettura contemporanea.'
-                    : 'Active since 2021, our methodology combines technical rigour and architectural sensibility to meet the most complex challenges of contemporary architecture.' }}
+                    ? 'In attività dal 2022, la nostra metodologia combina rigore tecnico e sensibilità architettonica per rispondere alle sfide più complesse dell\'architettura contemporanea.'
+                    : 'Active since 2022, our methodology combines technical rigour and architectural sensibility to meet the most complex challenges of contemporary architecture.' }}
             </p>
         </div>
     </div>
