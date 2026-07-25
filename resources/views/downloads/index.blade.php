@@ -14,7 +14,7 @@
 
     {{-- Immagine decorativa accanto all'introduzione --}}
     <div class="hidden lg:block"
-         style="position:absolute; top:55%; right:4vw; transform:translateY(-50%);
+         style="position:absolute; top:58%; right:4vw; transform:translateY(-50%);
                 width:26vw; max-width:460px;
                 pointer-events:none; z-index:0;">
         <img src="/images/VILLAGGIO.png" alt=""

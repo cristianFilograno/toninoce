@@ -55,12 +55,22 @@
             opacity: 0.7;
         }
 
-        /* ── Responsive immagine decorativa ── */
-        @media (max-width: 1023px) {
-            #vela-img { width: 60vw !important; opacity: 0.5 !important; }
+        /* ── Immagine decorativa VELA: ancorata all'angolo basso-sinistra, scala fluida ── */
+        #vela-img {
+            position: fixed;
+            bottom: 0;
+            left: clamp(1rem, 6vw, 5rem);
+            width: clamp(280px, 46vw, 760px);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+            display: block;
+            object-fit: contain;
+            object-position: bottom left;
         }
+        /* Su schermi molto piccoli si attenua per non disturbare il contenuto centrale */
         @media (max-width: 639px) {
-            #vela-img { width: 88vw !important; opacity: 0.4 !important; left: 4vw !important; bottom: 3vh !important; }
+            #vela-img { opacity: 0.4; }
         }
 
         /* ── Accessibilità: rispetta la preferenza di riduzione del movimento ── */
@@ -71,12 +81,8 @@
 </head>
 <body class="bg-graph overflow-hidden h-screen" style="color:#1a1510;">
 
-    {{-- Immagine decorativa bottom-left --}}
-    <img id="vela-img" src="/images/VELA.png" alt=""
-         class="fade-target"
-         style="position:fixed; bottom:0; left:6vw; width:52vw; max-width:780px;
-                opacity:0.7; pointer-events:none; z-index:0; display:block;
-                object-fit:contain; object-position:bottom left;">
+    {{-- Immagine decorativa bottom-left (stili in <style>, ancorata all'angolo) --}}
+    <img id="vela-img" src="/images/VELA.png" alt="" class="fade-target">
 
     <div id="main-content" class="fade-target h-screen flex flex-col items-center justify-center px-6" style="position:relative; z-index:1;">
 

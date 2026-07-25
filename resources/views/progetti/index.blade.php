@@ -16,7 +16,7 @@
     <div data-animate="fade" data-delay="0.3s"
          class="hidden lg:block"
          style="position:absolute; top:50%; right:7.5vw; transform:translateY(-50%);
-                width:22vw; max-width:380px;
+                width:25vw; max-width:430px;
                 pointer-events:none; z-index:0;">
         <img src="/images/UNI.png" alt=""
              style="width:100%; display:block; opacity:0.4; transform:scaleX(1.24);">

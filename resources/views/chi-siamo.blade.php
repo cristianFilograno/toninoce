@@ -19,80 +19,100 @@
     @media (prefers-reduced-motion: reduce) {
         .hero-reveal { animation: none; }
     }
+
+    /* Contenitore hero: la larghezza scala IN PROPORZIONE al viewport (vw),
+       in modo continuo. Così il bordo destro — e le foto ancorate ad esso —
+       si distanziano dal testo in proporzione alla dimensione dello schermo,
+       senza scatti bruschi. Limiti min/max per leggibilità. */
+    .hero-wrap {
+        width: 100%;
+        max-width: clamp(76rem, 84vw, 108rem);
+        margin-inline: auto;
+    }
 </style>
 @endsection
 
 @section('content')
 
 {{-- ── HERO ─────────────────────────────────────────────────────── --}}
-<section class="min-h-[85vh] flex flex-col justify-center" style="position:relative; overflow:hidden;">
+<section class="min-h-[85vh] flex items-center" style="position:relative; overflow:hidden;">
 
-    {{-- Immagine decorativa a destra del titolo --}}
-    <div class="hero-reveal hidden lg:block"
-         style="position:absolute; top:6%; right:3vw;
-                width:32vw; max-width:560px;
-                pointer-events:none; z-index:0;
-                animation-delay:0.5s;">
-        <img src="/images/STADIO.png" alt=""
-             style="width:100%; display:block; opacity:0.4; transform:rotate(-7.1deg);">
-    </div>
+    {{-- Contenitore: le immagini decorative sono ancorate a QUESTO box (il contenuto),
+         non al viewport, così restano allineate al testo su ogni schermo.
+         Su schermi grandi il box si allarga (fino a 1600px) per ridurre lo spazio ai lati. --}}
+    <div class="hero-wrap px-6 py-24" style="position:relative;">
 
-    {{-- Immagine decorativa in basso a destra (accanto ai bottoni) --}}
-    <div class="hero-reveal hidden lg:block"
-         style="position:absolute; bottom:0; right:12vw;
-                width:34vw; max-width:600px;
-                pointer-events:none; z-index:0;
-                animation-delay:0.65s;">
-        <img src="/images/ALBERO.png" alt=""
-             style="width:100%; display:block; opacity:0.4;">
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 py-24" style="position:relative; z-index:1;">
-
-        <div class="hero-reveal flex items-center gap-4 mb-10" style="animation-delay:0.05s;">
-            <div class="w-8 h-px" style="background:#c0392b;"></div>
-            <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
-                {{ app()->getLocale() === 'it' ? 'Ingegnere dal 2022' : 'Engineer since 2022' }}
-            </p>
+        {{-- Immagine decorativa: angolo alto-destra del contenuto.
+             La distanza dal bordo destro è ~0 sul 13" e cresce in proporzione
+             al viewport sugli schermi più grandi (max(0, Xvw - offset)). --}}
+        <div class="hero-reveal hidden lg:block"
+             style="position:absolute; top:6%; right:max(-3rem, 7vw - 8rem);
+                    width:clamp(300px, 30vw, 540px);
+                    pointer-events:none; z-index:0;
+                    animation-delay:0.5s;">
+            <img src="/images/STADIO.png" alt=""
+                 style="width:100%; display:block; opacity:0.4; transform:rotate(-7.1deg);">
         </div>
 
-        <h1 class="hero-reveal font-display leading-[1.05] mb-8"
-            style="font-size:clamp(3rem,8vw,7.5rem); font-weight:900; color:#1a1510; max-width:15ch; animation-delay:0.15s;">
-            {{ app()->getLocale() === 'it' ? 'Costruire con' : 'Building with' }}
-            <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
-                {{ app()->getLocale() === 'it' ? 'precisione,' : 'precision,' }}
-            </span><br>
-            {{ app()->getLocale() === 'it' ? 'progettare su' : 'designing' }}
-            <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
-                {{ app()->getLocale() === 'it' ? 'misura.' : 'bespoke.' }}
-            </span>
-        </h1>
+        {{-- Immagine decorativa: angolo basso-destra del contenuto.
+             Distanza dal bordo destro proporzionale al viewport. --}}
+        <div class="hero-reveal hidden lg:block"
+             style="position:absolute; bottom:0; right:max(5.5rem, 11vw - 6.5rem);
+                    width:clamp(320px, 32vw, 580px);
+                    pointer-events:none; z-index:0;
+                    animation-delay:0.65s;">
+            <img src="/images/ALBERO.png" alt=""
+                 style="width:100%; display:block; opacity:0.4;">
+        </div>
 
-        <p class="hero-reveal mb-12 max-w-lg leading-relaxed"
-           style="font-size:1.125rem; color:#4e4030; font-weight:300; animation-delay:0.28s;">
-            {{ app()->getLocale() === 'it'
-                ? 'Antonio Ceglie, in arte Tonino, è ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito. Operiamo dove la tecnica incontra la cura del dettaglio.'
-                : 'Antonio Ceglie, known as Tonino, is a structural engineer specialised in design, construction and consolidation of existing buildings. We work where technique meets attention to detail.' }}
-        </p>
+        {{-- Contenuto testuale, sopra le immagini --}}
+        <div style="position:relative; z-index:1;">
 
-        <div class="hero-reveal flex flex-wrap justify-center md:justify-start items-center gap-4" style="animation-delay:0.4s;">
-            <a href="{{ route('progetti', ['locale' => app()->getLocale()]) }}"
-               class="inline-flex items-center gap-2 px-7 py-3.5 font-medium text-sm transition-all duration-200"
-               style="background:#1a1510; color:#f0ead6;"
-               onmouseover="this.style.background='#c0392b';"
-               onmouseout="this.style.background='#1a1510';">
-                {{ app()->getLocale() === 'it' ? 'Vedi i progetti' : 'See our projects' }}
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
-            <a href="{{ route('contatti', ['locale' => app()->getLocale()]) }}"
-               class="inline-flex items-center gap-2 px-7 py-3.5 font-medium text-sm border transition-all duration-200"
-               style="border-color:#1a1510; color:#1a1510;"
-               onmouseover="this.style.background='#1a1510';this.style.color='#f0ead6';"
-               onmouseout="this.style.background='transparent';this.style.color='#1a1510';">
-                {{ app()->getLocale() === 'it' ? 'Richiedi una consulenza' : 'Request a consultation' }}
-            </a>
+            <div class="hero-reveal flex items-center gap-4 mb-10" style="animation-delay:0.05s;">
+                <div class="w-8 h-px" style="background:#c0392b;"></div>
+                <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
+                    {{ app()->getLocale() === 'it' ? 'Ingegnere dal 2022' : 'Engineer since 2022' }}
+                </p>
+            </div>
+
+            <h1 class="hero-reveal font-display leading-[1.05] mb-8"
+                style="font-size:clamp(3rem,8vw,7.5rem); font-weight:900; color:#1a1510; max-width:15ch; animation-delay:0.15s;">
+                {{ app()->getLocale() === 'it' ? 'Costruire con' : 'Building with' }}
+                <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
+                    {{ app()->getLocale() === 'it' ? 'precisione,' : 'precision,' }}
+                </span><br>
+                {{ app()->getLocale() === 'it' ? 'progettare su' : 'designing' }}
+                <span class="font-italic" style="font-style:italic; color:#c0392b; font-weight:400;">
+                    {{ app()->getLocale() === 'it' ? 'misura.' : 'bespoke.' }}
+                </span>
+            </h1>
+
+            <p class="hero-reveal mb-12 max-w-lg leading-relaxed"
+               style="font-size:1.125rem; color:#4e4030; font-weight:300; animation-delay:0.28s;">
+                {{ app()->getLocale() === 'it'
+                    ? 'Antonio Ceglie, in arte Tonino, è ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito. Operiamo dove la tecnica incontra la cura del dettaglio.'
+                    : 'Antonio Ceglie, known as Tonino, is a structural engineer specialised in design, construction and consolidation of existing buildings. We work where technique meets attention to detail.' }}
+            </p>
+
+            <div class="hero-reveal flex flex-wrap justify-center md:justify-start items-center gap-4" style="animation-delay:0.4s;">
+                <a href="{{ route('progetti', ['locale' => app()->getLocale()]) }}"
+                   class="inline-flex items-center gap-2 px-7 py-3.5 font-medium text-sm transition-all duration-200"
+                   style="background:#1a1510; color:#f0ead6;"
+                   onmouseover="this.style.background='#c0392b';"
+                   onmouseout="this.style.background='#1a1510';">
+                    {{ app()->getLocale() === 'it' ? 'Vedi i progetti' : 'See our projects' }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+                <a href="{{ route('contatti', ['locale' => app()->getLocale()]) }}"
+                   class="inline-flex items-center gap-2 px-7 py-3.5 font-medium text-sm border transition-all duration-200"
+                   style="border-color:#1a1510; color:#1a1510;"
+                   onmouseover="this.style.background='#1a1510';this.style.color='#f0ead6';"
+                   onmouseout="this.style.background='transparent';this.style.color='#1a1510';">
+                    {{ app()->getLocale() === 'it' ? 'Richiedi una consulenza' : 'Request a consultation' }}
+                </a>
+            </div>
         </div>
     </div>
 </section>
