@@ -10,6 +10,18 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{ url()->current() }}">
 
+    {{-- hreflang: versioni IT/EN della pagina corrente --}}
+    @php
+        $currentRoute = \Illuminate\Support\Facades\Route::currentRouteName();
+        $routeParams  = request()->route() ? request()->route()->parameters() : [];
+    @endphp
+    @if($currentRoute && isset($routeParams['locale']))
+        @foreach(['it', 'en'] as $hl)
+            <link rel="alternate" hreflang="{{ $hl }}" href="{{ route($currentRoute, array_merge($routeParams, ['locale' => $hl])) }}">
+        @endforeach
+        <link rel="alternate" hreflang="x-default" href="{{ route($currentRoute, array_merge($routeParams, ['locale' => 'it'])) }}">
+    @endif
+
     {{-- Open Graph --}}
     <meta property="og:type"        content="website">
     <meta property="og:locale"      content="{{ app()->getLocale() === 'it' ? 'it_IT' : 'en_GB' }}">
@@ -17,6 +29,13 @@
     <meta property="og:title"       content="@yield('title', config('app.name'))">
     <meta property="og:description" content="@yield('description', app()->getLocale() === 'it' ? 'TONINOcè — Studio di ingegneria strutturale specializzato in progettazione, direzione lavori e consolidamento di edifici.' : 'TONINOcè — Structural engineering studio specialised in design, site management and building consolidation.')">
     <meta property="og:url"         content="{{ url()->current() }}">
+    <meta property="og:image"       content="{{ asset('images/logo.png') }}">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="@yield('title', config('app.name'))">
+    <meta name="twitter:description" content="@yield('description', app()->getLocale() === 'it' ? 'TONINOcè — Studio di ingegneria strutturale specializzato in progettazione, direzione lavori e consolidamento di edifici.' : 'TONINOcè — Structural engineering studio specialised in design, site management and building consolidation.')">
+    <meta name="twitter:image"       content="{{ asset('images/logo.png') }}">
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

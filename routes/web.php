@@ -4,6 +4,7 @@ use App\Http\Controllers\ContattoController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgettoController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 // Home — scelta lingua
@@ -11,6 +12,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/lingua/{locale}', [HomeController::class, 'setLocale'])
     ->where('locale', 'it|en')
     ->name('set-locale');
+
+// Sitemap XML per i motori di ricerca
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Tutte le pagine con prefisso lingua
 Route::prefix('{locale}')

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,9 @@
     <meta property="og:title"       content="TONINOcè — Studio di Ingegneria Strutturale">
     <meta property="og:description" content="Studio di ingegneria strutturale specializzato in progettazione, direzione lavori e consolidamento.">
     <meta property="og:url"         content="{{ url('/') }}">
+    <meta property="og:image"       content="{{ asset('images/logo.png') }}">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:image"       content="{{ asset('images/logo.png') }}">
     <link rel="canonical" href="{{ url('/') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
