@@ -137,6 +137,8 @@
         </div>
     </div>
 
+    @include('partials.cookie-banner')
+
     <script>
         var _fly = false;
         function handleLocale(e, url) {

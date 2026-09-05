@@ -38,4 +38,9 @@ Route::prefix('{locale}')
         // Contatti
         Route::get('contatti', [ContattoController::class, 'index'])->name('contatti');
         Route::post('contatti', [ContattoController::class, 'store'])->name('contatti.store');
+
+        // Privacy Policy
+        Route::get('privacy', function () {
+            return view('privacy.index');
+        })->name('privacy');
     });

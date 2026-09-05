@@ -117,6 +117,7 @@
                class="foto-col hidden md:block flex-shrink-0 overflow-hidden"
                style="width:180px; height:130px; border:1px solid #d8cdb8;">
                 <img src="{{ $copertina }}" alt="{{ $titolo }}"
+                     loading="lazy" decoding="async"
                      class="w-full h-full object-cover transition-transform duration-300"
                      style="display:block;"
                      onmouseover="this.style.transform='scale(1.04)';"
@@ -179,6 +180,7 @@
                      style="scrollbar-width:thin; scrollbar-color:#d8cdb8 transparent;">
                     @foreach($slides as $idx => $url)
                     <img src="{{ $url }}" alt="{{ $titolo }}{{ $idx > 0 ? ' — foto '.($idx+1) : '' }}"
+                         loading="lazy" decoding="async"
                          onclick="openLightbox(this.src, this.alt)"
                          style="height:200px; width:auto; flex-shrink:0; object-fit:cover;
                                 border:1px solid #d8cdb8; display:block; cursor:zoom-in;

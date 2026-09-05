@@ -191,9 +191,19 @@
                    class="nav-link text-xs" style="color:#4e4030;">
                     {{ app()->getLocale() === 'it' ? 'Contatti' : 'Contact' }}
                 </a>
+                <a href="{{ route('privacy', ['locale' => app()->getLocale()]) }}"
+                   class="nav-link text-xs" style="color:#4e4030;">
+                    Privacy
+                </a>
+                <button type="button" onclick="reopenCookieBanner()"
+                        class="nav-link text-xs" style="color:#4e4030; background:none; border:none; padding:0; cursor:pointer;">
+                    Cookie
+                </button>
             </div>
         </div>
     </footer>
+
+    @include('partials.cookie-banner')
 
     {{-- ── PDF PREVIEW MODAL ───────────────────────────────────────── --}}
     <div id="pdf-modal"

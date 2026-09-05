@@ -128,6 +128,31 @@
                     @error('messaggio')<p class="text-xs mt-1" style="color:#c0392b;">{{ $message }}</p>@enderror
                 </div>
 
+                {{-- Honeypot anti-spam: campo nascosto, invisibile agli umani, riempito solo dai bot --}}
+                <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+                    <label>{{ app()->getLocale() === 'it' ? 'Non compilare' : 'Do not fill' }}
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </label>
+                </div>
+
+                {{-- Consenso privacy (obbligatorio) --}}
+                <div>
+                    <label class="flex items-start gap-3 cursor-pointer" style="color:#4e4030; font-size:0.8rem; line-height:1.5;">
+                        <input type="checkbox" name="privacy" value="1" required
+                               style="margin-top:0.15rem; accent-color:#c0392b; flex-shrink:0;">
+                        <span>
+                            {{ app()->getLocale() === 'it'
+                                ? 'Ho letto e accetto l\'informativa sul trattamento dei dati personali.'
+                                : 'I have read and accept the privacy policy on the processing of personal data.' }}
+                            <a href="{{ route('privacy', ['locale' => app()->getLocale()]) }}" target="_blank"
+                               style="color:#c0392b; text-decoration:underline;">
+                                {{ app()->getLocale() === 'it' ? 'Leggi l\'informativa' : 'Read the policy' }}
+                            </a>
+                        </span>
+                    </label>
+                    @error('privacy')<p class="text-xs mt-1" style="color:#c0392b;">{{ $message }}</p>@enderror
+                </div>
+
                 <button type="submit"
                         class="inline-flex items-center gap-3 px-8 py-3.5 text-sm font-medium transition-all duration-200"
                         style="background:#1a1510; color:#f0ead6;"

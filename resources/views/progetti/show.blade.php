@@ -63,6 +63,7 @@
                     @foreach($slides as $idx => $url)
                     <img src="{{ $url }}"
                          alt="{{ $titolo }}{{ $idx > 0 ? ' — ' . ($locale === 'it' ? 'foto' : 'photo') . ' ' . ($idx+1) : '' }}"
+                         loading="{{ $idx === 0 ? 'eager' : 'lazy' }}" decoding="async"
                          draggable="false"
                          onclick="openLightbox(this.src, this.alt)"
                          style="width:100%; flex-shrink:0; height:clamp(260px,55vw,520px); object-fit:cover; display:block;
