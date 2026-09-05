@@ -48,6 +48,18 @@
         @endif
 
     </div>
+
+    {{-- Epigrafe --}}
+    <blockquote class="mt-10 max-w-2xl" style="position:relative; z-index:1; border-left:2px solid #c0392b; padding-left:1.25rem;">
+        <p class="font-italic" style="font-style:italic; font-size:clamp(1rem,1.6vw,1.2rem); color:#4e4030; line-height:1.6;">
+            {{ app()->getLocale() === 'it'
+                ? '«I potenti calcolatori permettono di lasciar più libera la parte creativa del Progettista, che non deve soggiogarsi a ragionare nei termini operativi della macchina, autolimitando di fatto la sua libertà di scelta appena acquisita.»'
+                : '«Powerful computers allow the designer\'s creative side greater freedom, no longer forced to think in the operational terms of the machine, which would in fact self-limit the very freedom of choice just gained.»' }}
+        </p>
+        <cite class="block mt-3 not-italic text-xs tracking-[0.15em] uppercase" style="color:#8a7a64;">
+            Piero Pozzati — {{ app()->getLocale() === 'it' ? 'Tecnica delle costruzioni, vol. 1, ed. 1963' : 'Tecnica delle costruzioni, vol. 1, 1963 ed.' }}
+        </cite>
+    </blockquote>
 </section>
 
 {{-- 4 Macro categorie --}}

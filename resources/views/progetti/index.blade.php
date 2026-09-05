@@ -32,6 +32,19 @@
         class="font-display" style="font-size:clamp(2.5rem,6vw,5rem); font-weight:900; color:#1a1510; line-height:1.05; position:relative; z-index:1;">
         {{ app()->getLocale() === 'it' ? 'I nostri progetti' : 'Our projects' }}
     </h1>
+
+    {{-- Epigrafe --}}
+    <blockquote data-animate data-delay="0.2s"
+                class="mt-8 max-w-2xl" style="position:relative; z-index:1; border-left:2px solid #c0392b; padding-left:1.25rem;">
+        <p class="font-italic" style="font-style:italic; font-size:clamp(1rem,1.6vw,1.2rem); color:#4e4030; line-height:1.6;">
+            {{ app()->getLocale() === 'it'
+                ? '«Le semplificazioni non devono rendere il modello non significativo, dall\'altro calcoli troppo estesi non devono far perdere di vista i fatti veramente influenti né devono complicare il modello in modo da aumentare il rischio di distorsione dei risultati.»'
+                : '«Simplifications must not render the model insignificant; on the other hand, overly extensive calculations must not obscure the truly influential facts, nor complicate the model in a way that increases the risk of distorting the results.»' }}
+        </p>
+        <cite class="block mt-3 not-italic text-xs tracking-[0.15em] uppercase" style="color:#8a7a64;">
+            Piero Pozzati — {{ app()->getLocale() === 'it' ? 'Tecnica delle costruzioni, vol. 1, ed. 1963' : 'Tecnica delle costruzioni, vol. 1, 1963 ed.' }}
+        </cite>
+    </blockquote>
 </section>
 
 {{-- Filtri --}}

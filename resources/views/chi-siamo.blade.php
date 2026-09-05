@@ -29,6 +29,49 @@
         max-width: clamp(76rem, 84vw, 108rem);
         margin-inline: auto;
     }
+
+    /* ── Carosello Studio ── */
+    .studio-viewport {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #d8cdb8;
+        aspect-ratio: 4 / 3;
+        background: #e0d8c8;
+    }
+    .studio-track {
+        display: flex;
+        height: 100%;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .studio-slide { min-width: 100%; height: 100%; }
+    .studio-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .studio-nav {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        width: 42px; height: 42px; border: none; cursor: pointer;
+        background: rgba(26,21,16,0.55); color: #f0ead6;
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s;
+    }
+    .studio-nav:hover { background: rgba(26,21,16,0.85); }
+    .studio-prev { left: 0; }
+    .studio-next { right: 0; }
+    .studio-counter {
+        position: absolute; bottom: 10px; right: 12px;
+        background: rgba(26,21,16,0.6); color: #f0ead6;
+        font-size: 0.7rem; letter-spacing: 0.1em; padding: 3px 9px;
+    }
+    .studio-thumbs {
+        display: flex; gap: 6px; margin-top: 8px;
+        overflow-x: auto; padding-bottom: 4px;
+        scrollbar-width: thin; scrollbar-color: #d8cdb8 transparent;
+    }
+    .studio-thumb {
+        flex: 0 0 auto; width: 66px; height: 50px; padding: 0;
+        border: 2px solid transparent; cursor: pointer; background: none;
+        opacity: 0.5; transition: opacity 0.2s, border-color 0.2s;
+    }
+    .studio-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .studio-thumb.active { opacity: 1; border-color: #c0392b; }
 </style>
 @endsection
 
@@ -157,12 +200,67 @@
 <section class="py-24 max-w-7xl mx-auto px-6">
     <div class="grid md:grid-cols-2 gap-16 items-center">
 
+        @php
+            $studioDir = public_path('images/CAROSELLO');
+            $studioFotos = [];
+            if (is_dir($studioDir)) {
+                $files = glob($studioDir . '/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', GLOB_BRACE) ?: [];
+                natcasesort($files);
+                $studioFotos = array_values(array_map(fn ($f) => '/images/CAROSELLO/' . rawurlencode(basename($f)), $files));
+            }
+        @endphp
+
+        @if(count($studioFotos))
+        <div data-animate="left">
+            {{-- Carosello --}}
+            <div class="studio-viewport">
+                <div id="studio-track" class="studio-track">
+                    @foreach($studioFotos as $i => $foto)
+                    <div class="studio-slide">
+                        <img src="{{ $foto }}" alt="{{ app()->getLocale() === 'it' ? 'Studio' : 'Studio' }} — {{ $i + 1 }}"
+                             loading="lazy" decoding="async" draggable="false">
+                    </div>
+                    @endforeach
+                </div>
+
+                @if(count($studioFotos) > 1)
+                <button type="button" class="studio-nav studio-prev" id="studio-prev"
+                        aria-label="{{ app()->getLocale() === 'it' ? 'Foto precedente' : 'Previous photo' }}">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button type="button" class="studio-nav studio-next" id="studio-next"
+                        aria-label="{{ app()->getLocale() === 'it' ? 'Foto successiva' : 'Next photo' }}">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                <span class="studio-counter" id="studio-counter">1 / {{ count($studioFotos) }}</span>
+                @endif
+            </div>
+
+            {{-- Anteprime --}}
+            @if(count($studioFotos) > 1)
+            <div class="studio-thumbs" id="studio-thumbs">
+                @foreach($studioFotos as $i => $foto)
+                <button type="button" class="studio-thumb {{ $i === 0 ? 'active' : '' }}" data-idx="{{ $i }}"
+                        aria-label="{{ app()->getLocale() === 'it' ? 'Vai alla foto' : 'Go to photo' }} {{ $i + 1 }}">
+                    <img src="{{ $foto }}" alt="" loading="lazy" decoding="async">
+                </button>
+                @endforeach
+            </div>
+            @endif
+        </div>
+        @else
+        {{-- Nessuna foto caricata: placeholder --}}
         <div data-animate="left" class="aspect-[4/3]" style="background:#e0d8c8;">
             <div class="w-full h-full flex items-center justify-center"
                  style="color:#b5a898; font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic;">
                 {{ app()->getLocale() === 'it' ? 'Immagine studio' : 'Studio image' }}
             </div>
         </div>
+        @endif
 
         <div>
             <p data-animate data-delay="0.05s"
@@ -284,5 +382,54 @@
         </a>
     </div>
 </section>
+
+<script>
+    // ── Carosello Studio ──
+    (function () {
+        var track = document.getElementById('studio-track');
+        if (!track) return;
+        var slides = track.children.length;
+        if (slides < 2) return;
+
+        var thumbs   = Array.prototype.slice.call(document.querySelectorAll('#studio-thumbs .studio-thumb'));
+        var counter  = document.getElementById('studio-counter');
+        var btnPrev  = document.getElementById('studio-prev');
+        var btnNext  = document.getElementById('studio-next');
+        var idx = 0, timer = null;
+
+        function go(i) {
+            idx = (i + slides) % slides;
+            track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+            thumbs.forEach(function (t, j) { t.classList.toggle('active', j === idx); });
+            if (counter) counter.textContent = (idx + 1) + ' / ' + slides;
+            if (thumbs[idx]) thumbs[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+        function next() { go(idx + 1); }
+        function prev() { go(idx - 1); }
+        function restart() { clearInterval(timer); timer = setInterval(next, 4000); }
+
+        btnNext.addEventListener('click', function () { next(); restart(); });
+        btnPrev.addEventListener('click', function () { prev(); restart(); });
+        thumbs.forEach(function (t) {
+            t.addEventListener('click', function () { go(parseInt(t.dataset.idx, 10)); restart(); });
+        });
+
+        // Swipe su touch
+        var sx = 0;
+        track.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', function (e) {
+            var d = sx - e.changedTouches[0].clientX;
+            if (Math.abs(d) > 40) { d > 0 ? next() : prev(); restart(); }
+        }, { passive: true });
+
+        // Pausa quando la scheda non è visibile
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) clearInterval(timer); else restart();
+        });
+
+        go(0);
+        restart();
+    })();
+</script>
 
 @endsection
