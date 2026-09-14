@@ -142,15 +142,17 @@
 
             {{-- Titolo + descrizione — click titolo → pagina progetto --}}
             <div class="min-w-0">
-                <a href="{{ route('progetto.show', ['locale' => $locale, 'slug' => $progetto->slug]) }}"
-                   onclick="event.stopPropagation()"
-                   id="titolo-{{ $progetto->id }}"
-                   title="{{ $titolo }}"
-                   class="progetto-titolo font-display font-bold transition-colors"
-                   style="font-size:clamp(1.1rem,2vw,1.5rem); color:#1a1510; line-height:1.1;"
-                   onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
-                    {{ $titolo }}
-                </a>
+                <span class="progetto-titolo-wrap" data-full="{{ $titolo }}">
+                    <a href="{{ route('progetto.show', ['locale' => $locale, 'slug' => $progetto->slug]) }}"
+                       onclick="event.stopPropagation()"
+                       id="titolo-{{ $progetto->id }}"
+                       aria-label="{{ $titolo }}"
+                       class="progetto-titolo font-display font-bold transition-colors"
+                       style="font-size:clamp(1.1rem,2vw,1.5rem); color:#1a1510; line-height:1.1;"
+                       onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
+                        {{ $titolo }}
+                    </a>
+                </span>
                 @if($desc)
                 <p class="text-xs mt-0.5 line-clamp-1" style="color:#4e4030;">{{ Str::limit($desc, 80) }}</p>
                 @endif

@@ -102,6 +102,46 @@ nav.fixed { animation: nav-drop 0.6s cubic-bezier(0.4, 0, 0.2, 1) both; }
     overflow: visible;
 }
 
+/* ── Tooltip personalizzato sul titolo (hover) ── */
+.progetto-titolo-wrap {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+.progetto-titolo-wrap::after {
+    content: attr(data-full);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 8px;
+    z-index: 60;
+    background: #1a1510;
+    color: #f0ead6;
+    font-family: 'Palatino Linotype', 'Palatino', 'Book Antiqua', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    padding: 0.75rem 1rem;
+    width: max-content;
+    max-width: 380px;
+    box-shadow: 0 10px 30px rgba(26, 21, 16, 0.28);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+}
+.progetto-titolo-wrap:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+/* Se il titolo è già espanso (dropdown aperto), niente tooltip */
+.progetto-titolo-wrap:has(.progetto-titolo.expanded)::after {
+    display: none;
+}
+
 /* ── Animazioni scroll (IntersectionObserver) ────────────────────── */
 [data-animate] {
     opacity: 0;

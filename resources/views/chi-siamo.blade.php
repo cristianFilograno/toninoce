@@ -3,8 +3,8 @@
 @section('title', 'Studio')
 
 @section('description', app()->getLocale() === 'it'
-    ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, costruzione e consolidamento del costruito. Ingegnere dal 2022.'
-    : 'TONINOcè is a structural engineering studio specialised in design, construction and consolidation of existing buildings. Engineer since 2022.')
+    ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, costruzione e consolidamento del costruito. Ingegneria dal 2022.'
+    : 'TONINOcè is a structural engineering studio specialised in design, construction and consolidation of existing buildings. Engineering since 2022.')
 
 @section('head')
 <style>
@@ -114,7 +114,7 @@
             <div class="hero-reveal flex items-center gap-4 mb-10" style="animation-delay:0.05s;">
                 <div class="w-8 h-px" style="background:#c0392b;"></div>
                 <p class="text-xs tracking-[0.3em] uppercase" style="color:#4e4030;">
-                    {{ app()->getLocale() === 'it' ? 'Ingegnere dal 2022' : 'Engineer since 2022' }}
+                    {{ app()->getLocale() === 'it' ? 'Ingegneria dal 2022' : 'Engineering since 2022' }}
                 </p>
             </div>
 
