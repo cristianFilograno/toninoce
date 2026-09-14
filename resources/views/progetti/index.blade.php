@@ -144,8 +144,10 @@
             <div class="min-w-0">
                 <a href="{{ route('progetto.show', ['locale' => $locale, 'slug' => $progetto->slug]) }}"
                    onclick="event.stopPropagation()"
-                   class="font-display font-bold transition-colors"
-                   style="font-size:clamp(1.1rem,2vw,1.5rem); color:#1a1510; line-height:1.1; display:inline;"
+                   id="titolo-{{ $progetto->id }}"
+                   title="{{ $titolo }}"
+                   class="progetto-titolo font-display font-bold transition-colors"
+                   style="font-size:clamp(1.1rem,2vw,1.5rem); color:#1a1510; line-height:1.1;"
                    onmouseover="this.style.color='#c0392b';" onmouseout="this.style.color='#1a1510';">
                     {{ $titolo }}
                 </a>
@@ -340,9 +342,16 @@ function toggleProgetto(id) {
     document.querySelectorAll('[id^="arrow-"]').forEach(function(el) {
         el.style.transform = 'rotate(0deg)';
     });
+    // Chiudi tutti i titoli espansi
+    document.querySelectorAll('.progetto-titolo.expanded').forEach(function(el) {
+        el.classList.remove('expanded');
+    });
     if (!isOpen) {
         panel.classList.add('open');
         arrow.style.transform = 'rotate(180deg)';
+        // Mostra il titolo completo della riga aperta
+        var titolo = document.getElementById('titolo-' + id);
+        if (titolo) titolo.classList.add('expanded');
     }
 }
 </script>

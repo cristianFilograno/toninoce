@@ -394,17 +394,25 @@
         if (slides < 2) return;
 
         var thumbs   = Array.prototype.slice.call(document.querySelectorAll('#studio-thumbs .studio-thumb'));
+        var thumbsC  = document.getElementById('studio-thumbs');
         var counter  = document.getElementById('studio-counter');
         var btnPrev  = document.getElementById('studio-prev');
         var btnNext  = document.getElementById('studio-next');
         var idx = 0, timer = null;
+
+        // Centra la miniatura attiva scorrendo SOLO la striscia (mai la pagina)
+        function centerThumb(el) {
+            if (!thumbsC || !el) return;
+            var target = el.offsetLeft - (thumbsC.clientWidth / 2) + (el.clientWidth / 2);
+            thumbsC.scrollTo({ left: target, behavior: 'smooth' });
+        }
 
         function go(i) {
             idx = (i + slides) % slides;
             track.style.transform = 'translateX(-' + (idx * 100) + '%)';
             thumbs.forEach(function (t, j) { t.classList.toggle('active', j === idx); });
             if (counter) counter.textContent = (idx + 1) + ' / ' + slides;
-            if (thumbs[idx]) thumbs[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            centerThumb(thumbs[idx]);
         }
         function next() { go(idx + 1); }
         function prev() { go(idx - 1); }

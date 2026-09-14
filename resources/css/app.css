@@ -88,6 +88,20 @@ nav.fixed { animation: nav-drop 0.6s cubic-bezier(0.4, 0, 0.2, 1) both; }
     max-height: 900px;
 }
 
+/* ── Titolo progetto: troncato a 2 righe, esteso quando la riga è aperta ── */
+.progetto-titolo {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+}
+.progetto-titolo.expanded {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+}
+
 /* ── Animazioni scroll (IntersectionObserver) ────────────────────── */
 [data-animate] {
     opacity: 0;
