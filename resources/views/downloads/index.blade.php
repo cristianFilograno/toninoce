@@ -1,7 +1,7 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
 @extends('layouts.app')
 
-@section('title', 'Download — TONINOcè')
+@section('title', 'Download')
 
 @section('description', app()->getLocale() === 'it'
     ? 'Scarica gratuitamente elaborati scritti, grafici tipologici, applicativi di calcolo e pubblicazioni dalla biblioteca digitale di TONINOcè.'

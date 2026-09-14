@@ -1,7 +1,7 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
 @extends('layouts.app')
 
-@section('title', $progetto->getTranslation('titolo', app()->getLocale()) . ' — TONINOcè')
+@section('title', $progetto->getTranslation('titolo', app()->getLocale()))
 
 @section('description', Str::limit(
     $progetto->getTranslation('descrizione', app()->getLocale())

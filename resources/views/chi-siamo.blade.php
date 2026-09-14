@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'it' ? 'Studio — TONINOcè' : 'Studio — TONINOcè')
+@section('title', 'Studio')
 
 @section('description', app()->getLocale() === 'it'
     ? 'TONINOcè è uno studio di ingegneria strutturale specializzato in progettazione, costruzione e consolidamento del costruito. Ingegnere dal 2022.'
@@ -218,7 +218,9 @@
                     @foreach($studioFotos as $i => $foto)
                     <div class="studio-slide">
                         <img src="{{ $foto }}" alt="{{ app()->getLocale() === 'it' ? 'Studio' : 'Studio' }} — {{ $i + 1 }}"
-                             loading="lazy" decoding="async" draggable="false">
+                             loading="lazy" decoding="async" draggable="false"
+                             onclick="openLightbox(this.src, this.alt)"
+                             style="cursor:zoom-in;">
                     </div>
                     @endforeach
                 </div>

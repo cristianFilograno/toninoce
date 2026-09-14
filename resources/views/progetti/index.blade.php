@@ -1,7 +1,7 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'it' ? 'Progetti — TONINOcè' : 'Projects — TONINOcè')
+@section('title', app()->getLocale() === 'it' ? 'Progetti' : 'Projects')
 
 @section('description', app()->getLocale() === 'it'
     ? 'Scopri il portfolio di TONINOcè: progetti di ingegneria strutturale, restauro e consolidamento in tutta Italia.'

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TONINOcè — Studio di Ingegneria Strutturale</title>
+    <title>Studio di Ingegneria Strutturale</title>
     <meta name="description" content="TONINOcè — Studio di ingegneria strutturale specializzato in progettazione, direzione lavori e consolidamento. Structural engineering studio based in Italy.">
     <meta name="robots" content="index, follow">
     <meta property="og:type"        content="website">

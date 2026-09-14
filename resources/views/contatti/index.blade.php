@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'it' ? 'Contatti — TONINOcè' : 'Contact — TONINOcè')
+@section('title', app()->getLocale() === 'it' ? 'Contatti' : 'Contact')
 
 @section('description', app()->getLocale() === 'it'
     ? 'Contatta TONINOcè Studio di Ingegneria Strutturale per consulenze, progettazione e direzione lavori. Scrivici o chiamaci.'
