@@ -32,9 +32,10 @@
             <div class="space-y-8">
                 <div class="border-b pb-6" style="border-color:#d8cdb8;">
                     <p class="text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">
-                        {{ app()->getLocale() === 'it' ? 'Indirizzo' : 'Address' }}
+                        {{ app()->getLocale() === 'it' ? 'Indirizzi' : 'Addresses' }}
                     </p>
                     <p class="font-display text-lg" style="color:#1a1510;">Via Sigismondo Castromediano, 48<br>70126 Bari (BA)</p>
+                    <p class="font-display text-lg mt-3" style="color:#1a1510;">Via Plinio, 42<br>20129 Milano (MI)</p>
                 </div>
                 <div class="border-b pb-6" style="border-color:#d8cdb8;">
                     <p class="text-[10px] tracking-[0.25em] uppercase mb-2" style="color:#4e4030;">Email</p>
