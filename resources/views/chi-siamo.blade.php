@@ -62,6 +62,7 @@
     }
     .studio-thumbs {
         display: flex; gap: 6px; margin-top: 8px;
+        width: 100%; max-width: 100%;
         overflow-x: auto; padding-bottom: 4px;
         scrollbar-width: thin; scrollbar-color: #d8cdb8 transparent;
     }
@@ -198,7 +199,7 @@
 
 {{-- ── SEZIONE DETTAGLIO STUDIO ─────────────────────────────────── --}}
 <section class="py-24 max-w-7xl mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-16 items-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
         @php
             $studioDir = public_path('images/CAROSELLO');
@@ -211,7 +212,7 @@
         @endphp
 
         @if(count($studioFotos))
-        <div data-animate="left">
+        <div data-animate="left" class="min-w-0" style="max-width:100%;">
             {{-- Carosello --}}
             <div class="studio-viewport">
                 <div id="studio-track" class="studio-track">

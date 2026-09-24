@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'it' ? 'Privacy Policy — TONINOcè' : 'Privacy Policy — TONINOcè')
+@section('title', 'Privacy Policy')
 
 @section('description', app()->getLocale() === 'it'
     ? 'Informativa sul trattamento dei dati personali del sito ingantonioceglie.it ai sensi del GDPR.'
