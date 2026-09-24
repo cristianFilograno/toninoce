@@ -67,6 +67,43 @@
         "inLanguage": ["it", "en"]
     }
     </script>
+
+    {{-- ── JSON-LD Person (Antonio Ceglie) ───────────────────────────── --}}
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Person",
+        "name": "Antonio Ceglie",
+        "alternateName": "Toninocè",
+        "jobTitle": "{{ app()->getLocale() === 'it' ? 'Ingegnere strutturista' : 'Structural engineer' }}",
+        "description": "{{ app()->getLocale() === 'it' ? 'Ingegnere strutturista specializzato in progettazione, costruzione e consolidamento del costruito.' : 'Structural engineer specialised in design, construction and consolidation of existing buildings.' }}",
+        "url": "{{ config('app.url') }}",
+        "email": "antonio.ceglie1@gmail.com",
+        "telephone": "+393458477642",
+        "worksFor": {
+            "@@type": "ProfessionalService",
+            "name": "TONINOcè",
+            "url": "{{ config('app.url') }}"
+        },
+        "alumniOf": {
+            "@@type": "CollegeOrUniversity",
+            "name": "Politecnico di Bari"
+        },
+        "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "Via Sigismondo Castromediano, 48",
+            "addressLocality": "Bari",
+            "postalCode": "70126",
+            "addressCountry": "IT"
+        },
+        "knowsAbout": ["Ingegneria strutturale", "Consolidamento del costruito", "Progettazione geotecnica", "Vulnerabilità sismica", "Collaudo strutturale"],
+        "sameAs": [
+            "https://it.linkedin.com/in/antonio-ceglie-32949313a",
+            "https://www.researchgate.net/profile/Antonio_Ceglie3",
+            "https://independent.academia.edu/CeglieAntonio"
+        ]
+    }
+    </script>
 </head>
 <body class="bg-graph antialiased">
 
