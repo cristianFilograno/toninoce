@@ -21,6 +21,9 @@ class HomeController extends Controller
         session(['locale' => $locale]);
         app()->setLocale($locale);
 
-        return redirect()->route('chi-siamo', ['locale' => $locale]);
+        // noindex: /lingua è una rotta tecnica di redirect, non deve stare nei risultati Google
+        return redirect()
+            ->route('chi-siamo', ['locale' => $locale])
+            ->header('X-Robots-Tag', 'noindex');
     }
 }
